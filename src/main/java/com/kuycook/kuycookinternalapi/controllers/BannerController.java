@@ -48,7 +48,6 @@ public class BannerController {
     public Iterable<Banner> findBannerByName(@RequestBody SearchDataRequest searchData,
                                              @PathVariable("size") int size, @PathVariable("page") int page,
                                              @PathVariable("sort") String sort) {
-        System.out.println("Banner List Pagination≈" + bannerRepository.bannerList());
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
         if (sort.equalsIgnoreCase("asc"))
             pageable = PageRequest.of(page, size, Sort.by("id").ascending());
