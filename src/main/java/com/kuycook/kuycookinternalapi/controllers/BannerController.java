@@ -6,6 +6,7 @@ import com.kuycook.kuycookinternalapi.models.Banner;
 import com.kuycook.kuycookinternalapi.repositories.BannerRepository;
 import com.kuycook.kuycookinternalapi.services.banner.BannerService;
 import com.kuycook.kuycookinternalapi.services.banner.BannerServiceImpl;
+import com.kuycook.kuycookinternalapi.utils.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -57,7 +58,11 @@ public class BannerController {
     }
 
     @GetMapping("/{id}")
-    public Banner bannerDetail(@PathVariable("id") Long id) {
+    public Object bannerDetail(@PathVariable("id") Long id) {
+        System.out.println("banner detail: " + bannerServiceImpl.findBannerById(id));
+        if (bannerServiceImpl.findBannerById(id) == null) {
+            return new ResourceNotFoundException("Banner", "ID", id);
+        }
         return bannerServiceImpl.findBannerById(id);
     }
 
