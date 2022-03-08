@@ -1,14 +1,12 @@
 package com.kuycook.kuycookinternalapi.dto.response;
 
 import com.kuycook.kuycookinternalapi.models.Employee;
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-@Data
 public class CurrentUserResponse implements UserDetails {
     private static final Long serialVersionUID = 1L;
 
