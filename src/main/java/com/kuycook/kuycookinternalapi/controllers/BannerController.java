@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -32,19 +33,6 @@ public class BannerController {
         this.bannerService = bannerService;
     }
 
-    @GetMapping()
-    public List<Banner> getAllList() {
-        return bannerRepository.bannerList();
-    }
-
-    @PostMapping("/search/{size}/{page}")
-    public Iterable<Banner> findBannerByName(@RequestBody SearchDataRequest searchData,
-                                             @PathVariable("size") int size, @PathVariable("page") int page) {
-        System.out.println("Banner List Pagination≈" + bannerRepository.bannerList());
-        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
-        return bannerServiceImpl.findByName(searchData.getSearchKey(), pageable);
-    }
-
     @PostMapping("/search/{size}/{page}/{sort}")
     public Iterable<Banner> findBannerByName(@RequestBody SearchDataRequest searchData,
                                              @PathVariable("size") int size, @PathVariable("page") int page,
@@ -56,6 +44,23 @@ public class BannerController {
         return bannerServiceImpl.findByName(searchData.getSearchKey(), pageable);
     }
 
+    @GetMapping()
+    public Iterable<Banner> findBannerByName(@RequestParam(required = false, value = "search", defaultValue = "") String searchData,
+                                             @RequestParam(required = false, value = "size", defaultValue = "5") int size,
+                                             @RequestParam(required = false, value = "page", defaultValue = "0") int page,
+                                             @RequestParam(required = false, value = "sort", defaultValue = "desc") String sort)
+            throws IOException {
+        try {
+            Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+            if (sort.equalsIgnoreCase("asc")) {
+                pageable = PageRequest.of(page, size, Sort.by("id").ascending());
+            }
+            return bannerServiceImpl.findByName(searchData, pageable);
+        } catch (Exception e) {
+            throw new IOException(e);
+        }
+    }
+
     @GetMapping("/{id}")
     public Object bannerDetail(@PathVariable("id") Long id) {
         System.out.println("banner detail: " + bannerServiceImpl.findBannerById(id));
@@ -65,7 +70,7 @@ public class BannerController {
         return bannerServiceImpl.findBannerById(id);
     }
 
-    @PostMapping()
+    @PostMapping("/")
     public Banner bannerCreate(@RequestBody BannerRequest bannerRequest) {
         Banner banner = new Banner(bannerRequest.getTitle(), bannerRequest.getImage(),
                 bannerRequest.getCreatedAt(), bannerRequest.getUpdatedAt());
