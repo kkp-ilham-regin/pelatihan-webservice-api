@@ -1,4 +1,4 @@
-package com.kuycook.kuycookinternalapi.dto.requests;
+package com.kuycook.kuycookinternalapi.dto.banner.request;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;

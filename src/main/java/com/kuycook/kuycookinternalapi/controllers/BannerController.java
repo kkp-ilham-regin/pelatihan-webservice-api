@@ -1,6 +1,7 @@
 package com.kuycook.kuycookinternalapi.controllers;
 
-import com.kuycook.kuycookinternalapi.dto.requests.BannerRequest;
+import com.kuycook.kuycookinternalapi.dto.banner.response.BannerResponse;
+import com.kuycook.kuycookinternalapi.dto.banner.request.BannerRequest;
 import com.kuycook.kuycookinternalapi.dto.requests.SearchDataRequest;
 import com.kuycook.kuycookinternalapi.models.Banner;
 import com.kuycook.kuycookinternalapi.repositories.BannerRepository;
@@ -11,10 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @CrossOrigin(maxAge = 3600, origins = "*")
@@ -70,18 +75,48 @@ public class BannerController {
         return bannerServiceImpl.findBannerById(id);
     }
 
-    @PostMapping("/")
-    public Banner bannerCreate(@RequestBody BannerRequest bannerRequest) {
+    @PostMapping("/") //TODO: (!) for Errors error, should be on the third parameter
+    public ResponseEntity<BannerResponse<Banner>> bannerCreate(@Valid @RequestBody BannerRequest bannerRequest, Errors errors) {
+        BannerResponse<Banner> responsedata = new BannerResponse<>();
+        if (errors.hasErrors()) {
+            for (ObjectError error : errors.getAllErrors()) {
+                responsedata.getMessages().add(error.getDefaultMessage());
+            }
+            responsedata.setStatus(false);
+            responsedata.setCode(400);
+            responsedata.setData(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responsedata);
+        }
         Banner banner = new Banner(bannerRequest.getTitle(), bannerRequest.getImage(),
                 bannerRequest.getCreatedAt(), bannerRequest.getUpdatedAt());
-        return bannerServiceImpl.createBanner(banner);
+        responsedata.setStatus(true);
+        responsedata.setCode(200);
+        responsedata.setData(bannerServiceImpl.createBanner(banner));
+
+        return ResponseEntity.ok(responsedata);
     }
 
     @PutMapping("/{id}")
-    public Banner bannerUpdate(@RequestBody BannerRequest bannerRequest, @PathVariable("id") Long id) {
+    public ResponseEntity<BannerResponse<Banner>> bannerUpdate(@Valid @RequestBody BannerRequest bannerRequest,
+                                                               Errors errors, @PathVariable("id") Long id) {
+        BannerResponse<Banner> responseData = new BannerResponse<>();
+
+        if (errors.hasErrors()) {
+            for (ObjectError error : errors.getAllErrors()) {
+                responseData.getMessages().add(error.getDefaultMessage());
+            }
+            responseData.setStatus(false);
+            responseData.setCode(400);
+            responseData.setData(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+
         Banner banner = new Banner(bannerRequest.getTitle(), bannerRequest.getImage(),
                 bannerRequest.getCreatedAt(), bannerRequest.getUpdatedAt());
-        return bannerServiceImpl.updateBanner(id, banner);
+        responseData.setData(bannerServiceImpl.updateBanner(id, banner));
+        responseData.setStatus(true);
+        responseData.setCode(200);
+        return ResponseEntity.ok(responseData);
     }
 
     @DeleteMapping("/{id}")
