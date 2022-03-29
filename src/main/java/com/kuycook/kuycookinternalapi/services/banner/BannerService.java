@@ -7,5 +7,5 @@ public interface BannerService {
 
     Banner updateBanner(Long id, Banner banner);
 
-    Banner deletedBanner(Long id, Banner banner);
+    Banner deletedBanner(Long id);
 }
