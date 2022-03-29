@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.TransactionScoped;
+import java.time.LocalDateTime;
 
 @Service
 @TransactionScoped
@@ -40,11 +41,11 @@ public class BannerServiceImpl implements BannerService {
     }
 
     @Override
-    public Banner deletedBanner(Long id, Banner banner) {
+    public Banner deletedBanner(Long id) {
         Banner existingBanner = bannerRepository.findByIdAndDeletedAtIsNull(id).orElseThrow(
                 () -> new ResourceNotFoundException("Banner", "ID", id));
 
-        existingBanner.setDeletedAt(banner.getDeletedAt());
+        existingBanner.setDeletedAt(LocalDateTime.now());
         bannerRepository.save(existingBanner);
         return existingBanner;
     }

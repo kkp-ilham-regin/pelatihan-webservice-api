@@ -120,9 +120,7 @@ public class BannerController {
     }
 
     @DeleteMapping("/{id}")
-    public Banner deleteBanner(@RequestBody BannerRequest bannerRequest, @PathVariable("id") Long id) {
-        Banner banner = new Banner(bannerRequest.getDeletedAt());
-
-        return bannerServiceImpl.deletedBanner(id, banner);
+    public Banner deleteBanner(@PathVariable("id") Long id) {
+        return bannerServiceImpl.deletedBanner(id);
     }
 }
