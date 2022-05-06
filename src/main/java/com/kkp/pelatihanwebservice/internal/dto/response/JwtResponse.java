@@ -1,21 +1,21 @@
 package com.kkp.pelatihanwebservice.internal.dto.response;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 public class JwtResponse {
     private Long id;
     private String fullname;
     private String email;
-    private List<String> roles;
+    private LocalDateTime emailVerifiedAt;
     private String token;
     private String type = "Bearer";
 
-    public JwtResponse(Long id, String fullname, String email, List<String> roles, String token) {
+    public JwtResponse(Long id, String fullname, String email, LocalDateTime emailVerifiedAt, String token) {
         this.token = token;
         this.id = id;
         this.fullname = fullname;
         this.email = email;
-        this.roles = roles;
+        this.emailVerifiedAt = emailVerifiedAt;
     }
 
     public String getToken() {
@@ -58,11 +58,11 @@ public class JwtResponse {
         this.email = email;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public LocalDateTime getEmailVerifiedAt() {
+        return emailVerifiedAt;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setEmailVerifiedAt(LocalDateTime emailVerifiedAt) {
+        this.emailVerifiedAt = emailVerifiedAt;
     }
 }

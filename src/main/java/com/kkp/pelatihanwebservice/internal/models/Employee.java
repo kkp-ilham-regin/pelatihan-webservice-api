@@ -7,13 +7,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "employees", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
+    @Column(name = "name")
     private String fullname;
 
     @NotBlank
@@ -28,28 +29,21 @@ public class Employee {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "employees_roles",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    @Column(name = "email_verified_at")
+    private LocalDateTime emailVerifiedAt;
 
     public Employee() {
     }
 
     public Employee(Long id, String fullname, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt,
-                    LocalDateTime deletedAt, Set<Role> roles) {
+                    LocalDateTime emailVerifiedAt) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
         this.password = password;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
-        this.roles = roles;
+        this.emailVerifiedAt = emailVerifiedAt;
     }
 
     public Employee(String fullname, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt) {
@@ -109,19 +103,12 @@ public class Employee {
         this.updatedAt = updatedAt;
     }
 
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
+    public LocalDateTime getEmailVerifiedAt() {
+        return emailVerifiedAt;
     }
 
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
+    public void setEmailVerifiedAt(LocalDateTime emailVerifiedAt) {
+        this.emailVerifiedAt = emailVerifiedAt;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 }
