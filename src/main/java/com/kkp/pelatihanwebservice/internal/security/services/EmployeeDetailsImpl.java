@@ -3,14 +3,11 @@ package com.kkp.pelatihanwebservice.internal.security.services;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kkp.pelatihanwebservice.internal.models.Employee;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class EmployeeDetailsImpl implements UserDetails {
     private static final Long serialVersionUID = 1L;
@@ -20,7 +17,7 @@ public class EmployeeDetailsImpl implements UserDetails {
     private String email;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
-    LocalDateTime deletedAt;
+    LocalDateTime emailVerifiedAt;
 
     @JsonIgnore
     private String password;
@@ -28,27 +25,21 @@ public class EmployeeDetailsImpl implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public EmployeeDetailsImpl(Long id, String fullname, String email, String password,
-                               Collection<? extends GrantedAuthority> authorities, LocalDateTime createdAt,
-                               LocalDateTime updatedAt, LocalDateTime deletedAt) {
+                               LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime emailVerifiedAt) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = this.getDeletedAt();
+        this.emailVerifiedAt = emailVerifiedAt;
         this.password = password;
-        this.authorities = authorities;
     }
 
     public static EmployeeDetailsImpl build(Employee employee) {
 
-        List<GrantedAuthority> authorities = employee.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-                .collect(Collectors.toList());
-
         return new EmployeeDetailsImpl(employee.getId(), employee.getFullname(), employee.getEmail(),
-                employee.getPassword(), authorities, employee.getCreatedAt(),
-                employee.getUpdatedAt(), employee.getDeletedAt());
+                employee.getPassword(), employee.getCreatedAt(),
+                employee.getUpdatedAt(), employee.getEmailVerifiedAt());
     }
 
     public Long getId() {
@@ -124,11 +115,11 @@ public class EmployeeDetailsImpl implements UserDetails {
         this.updatedAt = updatedAt;
     }
 
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
+    public LocalDateTime getEmailVerifiedAt() {
+        return emailVerifiedAt;
     }
 
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
+    public void setEmailVerifiedAt(LocalDateTime emailVerifiedAt) {
+        this.emailVerifiedAt = emailVerifiedAt;
     }
 }

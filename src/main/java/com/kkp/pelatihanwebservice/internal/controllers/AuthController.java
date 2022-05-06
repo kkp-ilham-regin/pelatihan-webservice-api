@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
@@ -56,12 +56,10 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
         EmployeeDetailsImpl employeeDetails = (EmployeeDetailsImpl) authentication.getPrincipal();
-        List<String> roles = employeeDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority()).collect(Collectors.toList());
-
+        
         return ResponseEntity.ok(
                 new JwtResponse(employeeDetails.getId(), employeeDetails.getFullname(),
-                        employeeDetails.getEmail(), roles, jwt)
+                        employeeDetails.getEmail(), employeeDetails.getEmailVerifiedAt(), jwt)
         );
     }
 
@@ -107,7 +105,6 @@ public class AuthController {
                 }
             });
         }
-        employee.setRoles(roles);
         employeeRepository.save(employee);
 
         return ResponseEntity.ok(new MessageResponse(201, true, "Registrasi pegawai berhasil"));
