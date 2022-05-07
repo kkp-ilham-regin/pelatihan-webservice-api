@@ -1,6 +1,5 @@
 package com.kkp.pelatihanwebservice.internal.controllers;
 
-import com.kkp.pelatihanwebservice.internal.models.Gender;
 import com.kkp.pelatihanwebservice.internal.models.Religion;
 import com.kkp.pelatihanwebservice.internal.services.religion.ReligionService;
 import org.springframework.beans.factory.annotation.Autowired;
