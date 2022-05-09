@@ -1,10 +1,11 @@
 package com.kkp.pelatihanwebservice.internal.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
@@ -21,7 +22,11 @@ public class Employee {
     private String email;
 
     @NotBlank
+    @JsonIgnore
     private String password;
+
+    @Column(name = "email_verified_at")
+    private LocalDateTime emailVerifiedAt;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -29,21 +34,22 @@ public class Employee {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "email_verified_at")
-    private LocalDateTime emailVerifiedAt;
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 
     public Employee() {
     }
 
-    public Employee(Long id, String fullname, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt,
-                    LocalDateTime emailVerifiedAt) {
+    public Employee(Long id, String fullname, String email, String password, LocalDateTime emailVerifiedAt,
+                    LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
         this.password = password;
+        this.emailVerifiedAt = emailVerifiedAt;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.emailVerifiedAt = emailVerifiedAt;
+        this.deletedAt = deletedAt;
     }
 
     public Employee(String fullname, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt) {
@@ -52,6 +58,17 @@ public class Employee {
         this.password = password;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public Employee(String name, String email, String password, LocalDateTime emailVerifiedAt,
+                    LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+        this.fullname = name;
+        this.email = email;
+        this.password = password;
+        this.emailVerifiedAt = emailVerifiedAt;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
 
@@ -101,6 +118,14 @@ public class Employee {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
     public LocalDateTime getEmailVerifiedAt() {
