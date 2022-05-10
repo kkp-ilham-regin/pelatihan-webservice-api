@@ -34,14 +34,11 @@ public class Employee {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
-
     public Employee() {
     }
 
     public Employee(Long id, String fullname, String email, String password, LocalDateTime emailVerifiedAt,
-                    LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+                    LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
@@ -49,7 +46,6 @@ public class Employee {
         this.emailVerifiedAt = emailVerifiedAt;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public Employee(String fullname, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt) {
@@ -61,14 +57,13 @@ public class Employee {
     }
 
     public Employee(String name, String email, String password, LocalDateTime emailVerifiedAt,
-                    LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+                    LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.fullname = name;
         this.email = email;
         this.password = password;
         this.emailVerifiedAt = emailVerifiedAt;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
 
@@ -118,14 +113,6 @@ public class Employee {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 
     public LocalDateTime getEmailVerifiedAt() {
