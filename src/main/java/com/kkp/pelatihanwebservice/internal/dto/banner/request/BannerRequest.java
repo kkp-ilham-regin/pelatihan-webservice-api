@@ -11,8 +11,7 @@ public class BannerRequest {
     private String image;
 
     LocalDateTime createdAt = LocalDateTime.now();
-    LocalDateTime updatedAt = LocalDateTime.now();
-    LocalDateTime deletedAt = LocalDateTime.now();
+    LocalDateTime updatedAt = null;
 
     public String getTitle() {
         return title;
@@ -44,13 +43,5 @@ public class BannerRequest {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }

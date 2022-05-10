@@ -23,11 +23,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public Iterable<Employee> findAllEmployee(String name, Pageable pageable) {
-        return employeeRepository.findByFullnameContainsAndDeletedAtIsNull(name, pageable);
+        return employeeRepository.findByFullnameContains(name, pageable);
     }
 
     public Employee findEmployeeById(Long id) {
-        return employeeRepository.findEmployeeByIdAndDeletedAtIsNull(id);
+        return employeeRepository.findEmployeeById(id);
     }
 
     @Override
@@ -37,12 +37,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee updateEmployee(Long id, Employee employee) {
-        Employee existingEmployee = employeeRepository.findByIdAndDeletedAtIsNull(id).orElseThrow(
+        Employee existingEmployee = employeeRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Employee", "ID", id));
 
         existingEmployee.setFullname(employee.getFullname());
         existingEmployee.setEmail(employee.getEmail());
         existingEmployee.setPassword(employee.getPassword());
+        existingEmployee.setUpdatedAt(LocalDateTime.now());
 
         employeeRepository.save(existingEmployee);
         return existingEmployee;
@@ -50,10 +51,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee deleteEmployee(Long id) {
-        Employee existingEmployee = employeeRepository.findByIdAndDeletedAtIsNull(id).orElseThrow(
+        Employee existingEmployee = employeeRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Employee", "ID", id));
-        existingEmployee.setDeletedAt(LocalDateTime.now());
-        employeeRepository.save(existingEmployee);
+        employeeRepository.delete(existingEmployee);
         return existingEmployee;
     }
 }

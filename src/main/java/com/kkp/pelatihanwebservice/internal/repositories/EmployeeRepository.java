@@ -14,9 +14,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     Boolean existsEmployeeByEmail(String email);
 
-    Page<Employee> findByFullnameContainsAndDeletedAtIsNull(String name, Pageable pageable);
+    Page<Employee> findByFullnameContains(String name, Pageable pageable);
 
-    Employee findEmployeeByIdAndDeletedAtIsNull(Long id);
+    Employee findEmployeeById(Long id);
 
-    Optional<Employee> findByIdAndDeletedAtIsNull(Long id);
+    Optional<Employee> findById(Long id);
 }
