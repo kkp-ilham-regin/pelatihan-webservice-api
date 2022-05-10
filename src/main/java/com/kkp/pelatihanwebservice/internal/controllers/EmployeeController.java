@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @CrossOrigin(maxAge = 3600, origins = "*")
@@ -71,6 +72,19 @@ public class EmployeeController {
                                                                      Errors errors) {
         EmployeeResponse<Employee> responseData = new EmployeeResponse<>();
 
+        if (employeeRepository.existsEmployeeByEmail(employeeRequest.getEmail())) {
+            String[] errorMessages = {
+                    "Email sudah digunakan"
+            };
+            responseData.setData(null);
+            responseData.setStatus(false);
+            responseData.setCode(401);
+            for (String message : errorMessages) {
+                responseData.getMessages().add(message);
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+
         if (errors.hasErrors()) {
             for (ObjectError error : errors.getAllErrors()) {
                 responseData.getMessages().add(error.getDefaultMessage());
@@ -82,8 +96,7 @@ public class EmployeeController {
         }
 
         Employee employee = new Employee(employeeRequest.getName(), employeeRequest.getEmail(), encoder.encode(employeeRequest.getPassword()),
-                employeeRequest.getEmailVerifiedAt(), employeeRequest.getCreatedAt(), employeeRequest.getUpdatedAt(),
-                employeeRequest.getDeletedAt());
+                employeeRequest.getEmailVerifiedAt(), employeeRequest.getCreatedAt(), employeeRequest.getUpdatedAt());
         responseData.setStatus(true);
         responseData.setData(employeeServiceImpl.createEmployee(employee));
         responseData.setCode(200);
@@ -96,6 +109,39 @@ public class EmployeeController {
                                                                      Errors errors, @PathVariable("id") Long id) {
         EmployeeResponse<Employee> responseData = new EmployeeResponse<>();
 
+        if (employeeRequest.getEmail().equals(employeeServiceImpl.findEmployeeById(id).getEmail())) {
+            if (errors.hasErrors()) {
+                for (ObjectError error : errors.getAllErrors()) {
+                    responseData.getMessages().add(error.getDefaultMessage());
+                }
+                responseData.setStatus(false);
+                responseData.setCode(400);
+                responseData.setData(null);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+            }
+
+            Employee employee = new Employee(employeeRequest.getName(), employeeRequest.getEmail(), encoder.encode(employeeRequest.getPassword()),
+                    employeeRequest.getEmailVerifiedAt(), employeeRequest.getCreatedAt(), employeeRequest.getUpdatedAt());
+            responseData.setStatus(true);
+            responseData.setCode(200);
+            responseData.setData(employeeServiceImpl.updateEmployee(id, employee));
+            return ResponseEntity.ok(responseData);
+        }
+
+
+        if (employeeRepository.existsEmployeeByEmail(employeeRequest.getEmail())) {
+            String[] errorMessages = {
+                    "Email sudah digunakan"
+            };
+            responseData.setData(null);
+            responseData.setStatus(false);
+            responseData.setCode(401);
+            for (String message : errorMessages) {
+                responseData.getMessages().add(message);
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+
         if (errors.hasErrors()) {
             for (ObjectError error : errors.getAllErrors()) {
                 responseData.getMessages().add(error.getDefaultMessage());
@@ -107,8 +153,7 @@ public class EmployeeController {
         }
 
         Employee employee = new Employee(employeeRequest.getName(), employeeRequest.getEmail(), encoder.encode(employeeRequest.getPassword()),
-                employeeRequest.getEmailVerifiedAt(), employeeRequest.getCreatedAt(), employeeRequest.getUpdatedAt(),
-                employeeRequest.getDeletedAt());
+                employeeRequest.getEmailVerifiedAt(), employeeRequest.getCreatedAt(), employeeRequest.getUpdatedAt());
         responseData.setStatus(true);
         responseData.setCode(200);
         responseData.setData(employeeServiceImpl.updateEmployee(id, employee));
