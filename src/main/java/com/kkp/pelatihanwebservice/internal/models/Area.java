@@ -2,6 +2,7 @@ package com.kkp.pelatihanwebservice.internal.models;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "wilayah")
@@ -27,6 +28,9 @@ public class Area {
 
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "wilayah")
+    private Set<ParticipantInternal> participantInternal;
 
     public Area() {
     }
