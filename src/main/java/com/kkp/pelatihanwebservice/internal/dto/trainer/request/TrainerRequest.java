@@ -1,6 +1,5 @@
 package com.kkp.pelatihanwebservice.internal.dto.trainer.request;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;

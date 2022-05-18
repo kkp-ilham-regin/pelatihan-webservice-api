@@ -1,7 +1,10 @@
 package com.kkp.pelatihanwebservice.internal.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "")
@@ -30,6 +33,11 @@ public class Trainer {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id")
+    @JsonIgnore
+    private Set<Certificate> certificates;
 
     public Trainer() {
     }

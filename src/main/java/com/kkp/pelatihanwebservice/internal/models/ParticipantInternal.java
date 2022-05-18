@@ -1,8 +1,11 @@
 package com.kkp.pelatihanwebservice.internal.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "peserta")
@@ -33,7 +36,7 @@ public class ParticipantInternal {
     private String nik;
 
     @Column(name = "tgl_tmt_masuk")
-    private Date tanggaTmtMasuk;
+    private Date tanggalTmtMasuk;
 
     @Column(name = "alamat")
     private String alamat;
@@ -85,6 +88,14 @@ public class ParticipantInternal {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_status_pegawai", referencedColumnName = "id")
     private EmployeeStatus statusPegawai;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id")
+    @JsonIgnore
+    private Set<Certificate> certificates;
+
+    public ParticipantInternal() {
+    }
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -156,12 +167,12 @@ public class ParticipantInternal {
         this.nik = nik;
     }
 
-    public Date getTanggaTmtMasuk() {
-        return tanggaTmtMasuk;
+    public Date getTanggalTmtMasuk() {
+        return tanggalTmtMasuk;
     }
 
-    public void setTanggaTmtMasuk(Date tanggaTmtMasuk) {
-        this.tanggaTmtMasuk = tanggaTmtMasuk;
+    public void setTanggalTmtMasuk(Date tanggalTmtMasuk) {
+        this.tanggalTmtMasuk = tanggalTmtMasuk;
     }
 
     public String getAlamat() {
