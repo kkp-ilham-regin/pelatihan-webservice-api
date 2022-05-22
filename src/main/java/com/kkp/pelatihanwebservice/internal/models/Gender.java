@@ -23,7 +23,8 @@ public class Gender {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "jenisKelamin")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "jenisKelamin")
     private Set<ParticipantInternal> participantInternal;
 
     public Gender(Long id, String kodeJenisKelamin, String namaJenisKelamin, LocalDateTime createdAt,

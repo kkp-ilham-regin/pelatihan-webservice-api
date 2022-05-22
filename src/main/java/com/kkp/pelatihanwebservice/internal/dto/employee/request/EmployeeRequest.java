@@ -1,18 +1,22 @@
 package com.kkp.pelatihanwebservice.internal.dto.employee.request;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 public class EmployeeRequest {
-    @NotEmpty(message = "Name is required")
+    @NotBlank(message = "Nama tidak boleh kosong")
+    @NotEmpty(message = "Nama tidak boleh kosong")
     private String name;
 
-    @NotEmpty(message = "Email is required")
-    @Email(message = "Email is not valid")
+    @NotBlank(message = "Email tidak boleh kosong")
+    @NotEmpty(message = "Email tidak boleh kosong")
+    @Email(message = "Email tidak valid")
     private String email;
 
-    @NotEmpty(message = "Password is required")
+    @NotBlank(message = "Password tidak boleh kosong")
+    @NotEmpty(message = "Password tidak boleh kosong")
     private String password;
 
     LocalDateTime emailVerifiedAt = null;
