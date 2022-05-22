@@ -23,7 +23,8 @@ public class MaritalStatus {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "statusPernikahan")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "statusPernikahan")
     private Set<ParticipantInternal> participantInternal;
 
     public MaritalStatus() {

@@ -1,6 +1,8 @@
 package com.kkp.pelatihanwebservice.internal.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -65,28 +67,52 @@ public class ParticipantInternal {
     @Column(name = "url_image")
     private String urlImage;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_wilayah", referencedColumnName = "id")
+    @Column(name = "id_wilayah")
+    private Long idWilayah;
+
+    @Column(name = "id_jenis_kelamin")
+    private Long idJenisKelamin;
+
+    @Column(name = "id_agama")
+    private Long idAgama;
+
+    @Column(name = "id_status_pernikahan")
+    private Long idStatusPernikahan;
+
+    @Column(name = "id_pendidikan")
+    private Long idPendidikan;
+
+    @Column(name = "id_status_pegawai")
+    private Long idStatusPegawai;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_wilayah", insertable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Area wilayah;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_jenis_kelamin", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_jenis_kelamin", insertable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Gender jenisKelamin;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_agama", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_agama", insertable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Religion agama;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_status_pernikahan", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_status_pernikahan", insertable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private MaritalStatus statusPernikahan;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_pendidikan", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_pendidikan", insertable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Education pendidikan;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_status_pegawai", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_status_pegawai", insertable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private EmployeeStatus statusPegawai;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -309,5 +335,61 @@ public class ParticipantInternal {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Long getIdWilayah() {
+        return idWilayah;
+    }
+
+    public void setIdWilayah(Long idWilayah) {
+        this.idWilayah = idWilayah;
+    }
+
+    public Long getIdJenisKelamin() {
+        return idJenisKelamin;
+    }
+
+    public void setIdJenisKelamin(Long idJenisKelamin) {
+        this.idJenisKelamin = idJenisKelamin;
+    }
+
+    public Long getIdAgama() {
+        return idAgama;
+    }
+
+    public void setIdAgama(Long idAgama) {
+        this.idAgama = idAgama;
+    }
+
+    public Long getIdStatusPernikahan() {
+        return idStatusPernikahan;
+    }
+
+    public void setIdStatusPernikahan(Long idStatusPernikahan) {
+        this.idStatusPernikahan = idStatusPernikahan;
+    }
+
+    public Long getIdPendidikan() {
+        return idPendidikan;
+    }
+
+    public void setIdPendidikan(Long idPendidikan) {
+        this.idPendidikan = idPendidikan;
+    }
+
+    public Long getIdStatusPegawai() {
+        return idStatusPegawai;
+    }
+
+    public void setIdStatusPegawai(Long idStatusPegawai) {
+        this.idStatusPegawai = idStatusPegawai;
+    }
+
+    public Set<Certificate> getCertificates() {
+        return certificates;
+    }
+
+    public void setCertificates(Set<Certificate> certificates) {
+        this.certificates = certificates;
     }
 }

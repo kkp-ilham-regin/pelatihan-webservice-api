@@ -20,7 +20,9 @@ public class EmployeeStatus {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "statusPegawai", orphanRemoval = true, cascade = CascadeType.ALL)
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "statusPegawai")
     private Set<ParticipantInternal> participantInternal;
 
     public EmployeeStatus() {

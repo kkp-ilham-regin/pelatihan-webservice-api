@@ -23,7 +23,9 @@ public class Religion {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "agama")
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "agama")
     private Set<ParticipantInternal> participantInternal;
 
     public Religion(Long id, String kodeAgama, String namaAgama, LocalDateTime createdAt, LocalDateTime updatedAt) {

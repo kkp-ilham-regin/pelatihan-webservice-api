@@ -23,7 +23,8 @@ public class Education {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "pendidikan")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "pendidikan")
     private Set<ParticipantInternal> participantInternal;
 
     public Education() {

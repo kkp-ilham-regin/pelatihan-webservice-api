@@ -29,7 +29,8 @@ public class Area {
     @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "wilayah")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "wilayah")
     private Set<ParticipantInternal> participantInternal;
 
     public Area() {
