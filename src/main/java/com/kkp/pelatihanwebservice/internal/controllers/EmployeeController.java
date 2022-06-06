@@ -23,7 +23,7 @@ import java.io.IOException;
 
 @RestController
 @CrossOrigin(maxAge = 3600, origins = "*")
-@RequestMapping("/test/employees") //TODO: will be rolledback
+@RequestMapping("/pelatihan-webservice/internal-api/v1/employees")
 public class EmployeeController {
 
     private EmployeeService employeeService;
