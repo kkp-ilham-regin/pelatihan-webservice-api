@@ -36,6 +36,13 @@ public class Gender {
         this.updatedAt = updatedAt;
     }
 
+    public Gender(String kodeJenisKelamin, String namaJenisKelamin, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.kodeJenisKelamin = kodeJenisKelamin;
+        this.namaJenisKelamin = namaJenisKelamin;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public Gender() {
     }
 
