@@ -37,16 +37,11 @@ public class GenderController {
         this.genderService = genderService;
     }
 
-    //    @GetMapping("/genders")
-//    public List<Gender> getAllGender() {
-//        return genderService.getAllGender();
-//    }
-
     @GetMapping("")
     public Iterable<Gender> genderList(@RequestParam(required = false, value = "search", defaultValue = "") String searchData,
                                        @RequestParam(required = false, value = "size", defaultValue = "5") int size,
                                        @RequestParam(required = false, value = "page", defaultValue = "0") int page,
-                                       @RequestParam(required = false, value = "sort", defaultValue = "") String sort)
+                                       @RequestParam(required = false, value = "sort", defaultValue = "desc") String sort)
             throws IOException {
         try {
             Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());

@@ -39,6 +39,13 @@ public class Religion {
     public Religion() {
     }
 
+    public Religion(String kode, String nama, LocalDateTime createdAt, LocalDateTime updateAt) {
+        this.kodeAgama = kode;
+        this.namaAgama = nama;
+        this.createdAt = createdAt;
+        this.updatedAt = updateAt;
+    }
+
     public Long getId() {
         return id;
     }
