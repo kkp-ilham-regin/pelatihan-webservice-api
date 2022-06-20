@@ -28,6 +28,12 @@ public class EmployeeStatus {
     public EmployeeStatus() {
     }
 
+    public EmployeeStatus(String namaStatus, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.namaStatus = namaStatus;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public Long getId() {
         return id;
     }
