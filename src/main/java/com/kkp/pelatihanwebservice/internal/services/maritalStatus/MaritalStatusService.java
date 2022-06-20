@@ -1,21 +1,11 @@
 package com.kkp.pelatihanwebservice.internal.services.maritalStatus;
 
 import com.kkp.pelatihanwebservice.internal.models.MaritalStatus;
-import com.kkp.pelatihanwebservice.internal.repositories.MaritalStatusRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+public interface MaritalStatusService {
+    MaritalStatus createMaritalStatus(MaritalStatus maritalStatus);
 
-@Service
-public class MaritalStatusService {
-    @Autowired
-    MaritalStatusRepository maritalStatusRepository;
+    MaritalStatus updateMaritalStatus(Long id, MaritalStatus maritalStatus);
 
-    public List<MaritalStatus> getAllMaritalStatus() {
-        List<MaritalStatus> maritalStatuses = new ArrayList<MaritalStatus>();
-        maritalStatusRepository.findAll().forEach(maritalStatus -> maritalStatuses.add(maritalStatus));
-        return maritalStatuses;
-    }
+    MaritalStatus deleteMaritalStatus(Long id);
 }

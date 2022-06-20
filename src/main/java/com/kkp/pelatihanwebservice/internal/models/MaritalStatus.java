@@ -30,6 +30,13 @@ public class MaritalStatus {
     public MaritalStatus() {
     }
 
+    public MaritalStatus(String kode, String namaStatusPernikahan, LocalDateTime creadtedAt, LocalDateTime updatedAt) {
+        this.kodeStatusPernikahan = kode;
+        this.namaStatusPernikahan = namaStatusPernikahan;
+        this.createdAt = creadtedAt;
+        this.updatedAt = updatedAt;
+    }
+
     public Long getId() {
         return id;
     }
