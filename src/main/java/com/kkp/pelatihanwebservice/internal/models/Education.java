@@ -30,6 +30,13 @@ public class Education {
     public Education() {
     }
 
+    public Education(String kode, String nama, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.kodePendidikan = kode;
+        this.namaPendidikan = nama;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public Long getId() {
         return id;
     }
