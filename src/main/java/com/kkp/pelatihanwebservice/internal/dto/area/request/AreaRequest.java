@@ -1,57 +1,24 @@
-package com.kkp.pelatihanwebservice.internal.models;
+package com.kkp.pelatihanwebservice.internal.dto.area.request;
 
-import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
-import java.util.Set;
 
-@Entity
-@Table(name = "wilayah")
-public class Area {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "nm_wilayah")
+public class AreaRequest {
+    @NotEmpty(message = "Nama wilayah tidak boleh kosong")
     private String namaWilayah;
 
-    @Column(name = "email_1")
+    @Email(message = "Invalid email")
     private String email1;
 
-    @Column(name = "email_2")
+    @Email(message = "Invalid email")
     private String email2;
 
-    @Column(name = "email_3")
+    @Email(message = "Invalid email")
     private String email3;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updatedAt")
+    private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "wilayah")
-    private Set<ParticipantInternal> participantInternal;
-
-    public Area() {
-    }
-
-    public Area(String namaWilayah, String email1, String email2, String email3, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.namaWilayah = namaWilayah;
-        this.email1 = email1;
-        this.email2 = email2;
-        this.email3 = email3;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNamaWilayah() {
         return namaWilayah;
