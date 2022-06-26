@@ -109,6 +109,19 @@ public class EmployeeController {
                                                                     Errors errors, @PathVariable("id") Long id) {
         EmployeeResponse<UserApi> responseData = new EmployeeResponse<>();
 
+        if (userApiRepository.findEmployeeById(id) == null) {
+            String[] errorMessages = {
+                    "Employee not found"
+            };
+            responseData.setData(null);
+            responseData.setStatus(false);
+            responseData.setCode(404);
+            for (String message : errorMessages) {
+                responseData.getMessages().add(message);
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
+        }
+
         if (employeeRequest.getEmail().equals(employeeServiceImpl.findEmployeeById(id).getEmail())) {
             if (errors.hasErrors()) {
                 for (ObjectError error : errors.getAllErrors()) {
