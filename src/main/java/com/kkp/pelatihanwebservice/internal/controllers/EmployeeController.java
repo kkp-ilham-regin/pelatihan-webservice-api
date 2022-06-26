@@ -109,7 +109,7 @@ public class EmployeeController {
                                                                     Errors errors, @PathVariable("id") Long id) {
         EmployeeResponse<UserApi> responseData = new EmployeeResponse<>();
 
-        if (userApiRepository.findEmployeeById(id) == null) {
+        if (userApiRepository.findEmployeeById(id) == null || !userApiRepository.findEmployeeById(id).isAdminStatus()) {
             String[] errorMessages = {
                     "Employee not found"
             };

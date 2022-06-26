@@ -55,7 +55,7 @@ public class UserPublicController {
                                                                   Errors errors, @PathVariable("id") Long id) {
         PublicUserResponse<UserApi> responseData = new PublicUserResponse<>();
 
-        if (userApiRepository.findUserApiById(id) == null) {
+        if (userApiRepository.findUserApiById(id) == null || userApiRepository.findUserApiById(id).isAdminStatus()) {
             String[] errorMessages = {
                     "User not found"
             };
