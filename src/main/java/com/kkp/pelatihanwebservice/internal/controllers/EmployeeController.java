@@ -60,7 +60,8 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public Object employeeDetail(@PathVariable("id") Long id) {
-        if (employeeServiceImpl.findEmployeeById(id) == null) {
+
+        if (employeeServiceImpl.findEmployeeById(id) == null || !employeeServiceImpl.findEmployeeById(id).isAdminStatus()) {
             return new ResourceNotFoundException("Employee", "ID", id);
         }
         return employeeServiceImpl.findEmployeeById(id);

@@ -44,7 +44,7 @@ public class UserPublicController {
 
     @GetMapping("/{id}")
     public Object userDetail(@PathVariable("id") Long id) {
-        if (userApiServiceImpl.findUserApiById(id) == null) {
+        if (userApiServiceImpl.findUserApiById(id) == null || userApiServiceImpl.findUserApiById(id).isAdminStatus()) {
             return new ResourceNotFoundException("User", "ID", id);
         }
         return userApiServiceImpl.findUserApiById(id);
