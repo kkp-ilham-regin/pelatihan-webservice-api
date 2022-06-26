@@ -1,11 +1,11 @@
-package com.kkp.pelatihanwebservice.internal.dto.employee.response;
+package com.kkp.pelatihanwebservice.internal.dto.publicUser.response;
 
 import com.kkp.pelatihanwebservice.internal.models.UserApi;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeResponse<T> {
+public class PublicUserResponse<T> {
     private int code;
     private boolean status;
     private List<String> messages = new ArrayList<>();

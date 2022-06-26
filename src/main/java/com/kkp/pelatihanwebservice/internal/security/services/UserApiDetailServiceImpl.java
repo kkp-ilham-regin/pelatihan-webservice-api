@@ -1,7 +1,7 @@
 package com.kkp.pelatihanwebservice.internal.security.services;
 
-import com.kkp.pelatihanwebservice.internal.repositories.EmployeeRepository;
-import com.kkp.pelatihanwebservice.internal.models.Employee;
+import com.kkp.pelatihanwebservice.internal.repositories.UserApiRepository;
+import com.kkp.pelatihanwebservice.internal.models.UserApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,20 +12,20 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 
 @Service
-public class EmployeeDetailServiceImpl implements UserDetailsService {
+public class UserApiDetailServiceImpl implements UserDetailsService {
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    UserApiRepository userApiRepository;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Employee employee = employeeRepository.findEmployeeByEmail(email)
+        UserApi userApi = userApiRepository.findEmployeeByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
 
-        employee.setEmailVerifiedAt(LocalDateTime.now());
-        employeeRepository.save(employee);
+        userApi.setEmailVerifiedAt(LocalDateTime.now());
+        userApiRepository.save(userApi);
 
-        return EmployeeDetailsImpl.build(employee);
+        return UserApiDetailsImpl.build(userApi);
     }
 }

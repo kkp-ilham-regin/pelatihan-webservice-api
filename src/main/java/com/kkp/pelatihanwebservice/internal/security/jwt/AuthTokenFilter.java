@@ -1,6 +1,6 @@
 package com.kkp.pelatihanwebservice.internal.security.jwt;
 
-import com.kkp.pelatihanwebservice.internal.security.services.EmployeeDetailServiceImpl;
+import com.kkp.pelatihanwebservice.internal.security.services.UserApiDetailServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private EmployeeDetailServiceImpl employeeDetailService;
+    private UserApiDetailServiceImpl userApiDetailService;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
@@ -34,7 +34,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String email = jwtUtils.getEmailFromJwtToken(jwt);
-                UserDetails emloyeeDetail = employeeDetailService.loadUserByUsername(email);
+                UserDetails emloyeeDetail = userApiDetailService.loadUserByUsername(email);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(emloyeeDetail,
                         null, emloyeeDetail.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

@@ -1,6 +1,6 @@
 package com.kkp.pelatihanwebservice.internal.security.jwt;
 
-import com.kkp.pelatihanwebservice.internal.security.services.EmployeeDetailsImpl;
+import com.kkp.pelatihanwebservice.internal.security.services.UserApiDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class JwtUtils {
     private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
-        EmployeeDetailsImpl employeePrincipal = (EmployeeDetailsImpl) authentication.getPrincipal();
+        UserApiDetailsImpl employeePrincipal = (UserApiDetailsImpl) authentication.getPrincipal();
 
         return Jwts.builder()
                 .setSubject((employeePrincipal.getEmail()))
