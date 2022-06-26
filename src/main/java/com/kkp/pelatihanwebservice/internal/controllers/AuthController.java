@@ -68,7 +68,7 @@ public class AuthController {
 
         if (!userApiDetails.isAdmin()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ResourceNotFoundException("Employee", "ID", userApiDetails.getId()));
+                    .body(new ResourceNotFoundException("Employee", "Email", userApiDetails.getEmail()));
         }
 
         return ResponseEntity.ok(
@@ -87,7 +87,7 @@ public class AuthController {
 
         if (userApiDetails.isAdmin()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ResourceNotFoundException("User", "ID", userApiDetails.getId()));
+                    .body(new ResourceNotFoundException("User", "Email", userApiDetails.getEmail()));
         }
 
         return ResponseEntity.ok(
