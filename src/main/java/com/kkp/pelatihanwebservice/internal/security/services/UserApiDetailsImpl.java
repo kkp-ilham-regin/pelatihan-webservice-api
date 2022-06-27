@@ -1,7 +1,7 @@
 package com.kkp.pelatihanwebservice.internal.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.kkp.pelatihanwebservice.internal.models.Employee;
+import com.kkp.pelatihanwebservice.internal.models.UserApi;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Objects;
 
-public class EmployeeDetailsImpl implements UserDetails {
+public class UserApiDetailsImpl implements UserDetails {
     private static final Long serialVersionUID = 1L;
 
     private Long id;
@@ -18,14 +18,15 @@ public class EmployeeDetailsImpl implements UserDetails {
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
     LocalDateTime emailVerifiedAt;
+    private boolean isAdmin;
 
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public EmployeeDetailsImpl(Long id, String fullname, String email, String password,
-                               LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime emailVerifiedAt) {
+    public UserApiDetailsImpl(Long id, String fullname, String email, String password,
+                              LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime emailVerifiedAt, boolean isAdmin) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
@@ -33,13 +34,14 @@ public class EmployeeDetailsImpl implements UserDetails {
         this.updatedAt = updatedAt;
         this.emailVerifiedAt = emailVerifiedAt;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
-    public static EmployeeDetailsImpl build(Employee employee) {
+    public static UserApiDetailsImpl build(UserApi userApi) {
 
-        return new EmployeeDetailsImpl(employee.getId(), employee.getFullname(), employee.getEmail(),
-                employee.getPassword(), employee.getCreatedAt(),
-                employee.getUpdatedAt(), employee.getEmailVerifiedAt());
+        return new UserApiDetailsImpl(userApi.getId(), userApi.getFullname(), userApi.getEmail(),
+                userApi.getPassword(), userApi.getCreatedAt(),
+                userApi.getUpdatedAt(), userApi.getEmailVerifiedAt(), userApi.isAdminStatus());
     }
 
     public Long getId() {
@@ -95,7 +97,7 @@ public class EmployeeDetailsImpl implements UserDetails {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        EmployeeDetailsImpl employeeDetails = (EmployeeDetailsImpl) obj;
+        UserApiDetailsImpl employeeDetails = (UserApiDetailsImpl) obj;
         return Objects.equals(id, employeeDetails.id);
     }
 
@@ -121,5 +123,13 @@ public class EmployeeDetailsImpl implements UserDetails {
 
     public void setEmailVerifiedAt(LocalDateTime emailVerifiedAt) {
         this.emailVerifiedAt = emailVerifiedAt;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

@@ -1,6 +1,6 @@
 package com.kkp.pelatihanwebservice.internal.security;
 
-import com.kkp.pelatihanwebservice.internal.security.services.EmployeeDetailServiceImpl;
+import com.kkp.pelatihanwebservice.internal.security.services.UserApiDetailServiceImpl;
 import com.kkp.pelatihanwebservice.internal.security.jwt.AuthEntryPointJwt;
 import com.kkp.pelatihanwebservice.internal.security.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    EmployeeDetailServiceImpl employeeDetailService;
+    UserApiDetailServiceImpl userApiDetailService;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(employeeDetailService).passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.userDetailsService(userApiDetailService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

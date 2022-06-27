@@ -8,14 +8,16 @@ public class JwtResponse {
     private String email;
     private LocalDateTime emailVerifiedAt;
     private String token;
+    private boolean isAdmin;
     private String type = "Bearer";
 
-    public JwtResponse(Long id, String fullname, String email, LocalDateTime emailVerifiedAt, String token) {
+    public JwtResponse(Long id, String fullname, String email, LocalDateTime emailVerifiedAt, boolean isAdmin, String token) {
         this.token = token;
         this.id = id;
         this.fullname = fullname;
         this.email = email;
         this.emailVerifiedAt = emailVerifiedAt;
+        this.isAdmin = isAdmin;
     }
 
     public String getToken() {
@@ -64,5 +66,13 @@ public class JwtResponse {
 
     public void setEmailVerifiedAt(LocalDateTime emailVerifiedAt) {
         this.emailVerifiedAt = emailVerifiedAt;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

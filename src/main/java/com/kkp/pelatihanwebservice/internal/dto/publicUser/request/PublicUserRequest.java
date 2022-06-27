@@ -1,11 +1,11 @@
-package com.kkp.pelatihanwebservice.internal.dto.employee.request;
+package com.kkp.pelatihanwebservice.internal.dto.publicUser.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
-public class EmployeeRequest {
+public class PublicUserRequest {
     @NotBlank(message = "Nama tidak boleh kosong")
     @NotEmpty(message = "Nama tidak boleh kosong")
     private String name;
@@ -19,11 +19,11 @@ public class EmployeeRequest {
     @NotEmpty(message = "Password tidak boleh kosong")
     private String password;
 
-    private boolean isAdmin = true;
+    private boolean isAdmin = false;
     LocalDateTime emailVerifiedAt = null;
     LocalDateTime createdAt = LocalDateTime.now();
-    LocalDateTime updatedAt = LocalDateTime.now();
-    LocalDateTime deletedAt = null;
+    LocalDateTime updatedAt;
+    LocalDateTime deletedAt;
 
 
     public String getName() {
