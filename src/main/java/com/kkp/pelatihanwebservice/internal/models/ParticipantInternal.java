@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -115,10 +116,12 @@ public class ParticipantInternal {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private EmployeeStatus statusPegawai;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id")
-    @JsonIgnore
-    private Set<Certificate> certificates;
+    //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "id")
+//    @JsonIgnore
+    @OneToMany(mappedBy = "peserta", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<Certificate> certificates = new HashSet<>();
 
     public ParticipantInternal() {
     }
@@ -128,6 +131,39 @@ public class ParticipantInternal {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public ParticipantInternal(String namaPeserta, String nip, String nomorKta, Date expiredKta, String jabatan,
+                               String lokasiKerja, String nik, Date tanggalTmtMasuk, String alamat, String tempatLahir,
+                               Date tanggalLahir, String golonganDarah, String nomorTelepon, String namaSekolah, String email,
+                               String npwp, String urlImage, Long idWilayah, Long idJenisKelamin, Long idAgama,
+                               Long idStatusPernikahan, Long idPendidikan, Long idStatusPegawai, LocalDateTime createdAt,
+                               LocalDateTime updatedAt) {
+        this.namaPeserta = namaPeserta;
+        this.nip = nip;
+        this.nomorKta = nomorKta;
+        this.expiredKta = expiredKta;
+        this.jabatan = jabatan;
+        this.lokasiKerja = lokasiKerja;
+        this.nik = nik;
+        this.tanggalTmtMasuk = tanggalTmtMasuk;
+        this.alamat = alamat;
+        this.tempatLahir = tempatLahir;
+        this.tanggalLahir = tanggalLahir;
+        this.golonganDarah = golonganDarah;
+        this.nomorTelepon = nomorTelepon;
+        this.namaSekolah = namaSekolah;
+        this.email = email;
+        this.npwp = npwp;
+        this.urlImage = urlImage;
+        this.idWilayah = idWilayah;
+        this.idJenisKelamin = idJenisKelamin;
+        this.idAgama = idAgama;
+        this.idStatusPernikahan = idStatusPernikahan;
+        this.idPendidikan = idPendidikan;
+        this.idStatusPegawai = idStatusPegawai;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     public Long getId() {
         return id;
