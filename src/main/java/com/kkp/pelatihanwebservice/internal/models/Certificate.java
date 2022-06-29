@@ -1,5 +1,6 @@
 package com.kkp.pelatihanwebservice.internal.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -44,9 +45,12 @@ public class Certificate {
     @Column(name = "id_pelatihan")
     private Long idPelatihan;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    //    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+//    @JoinColumn(name = "id_peserta", insertable = false, updatable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_peserta", insertable = false, updatable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private ParticipantInternal peserta = new ParticipantInternal();
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
