@@ -19,7 +19,15 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
-        logger.error("Unauthorized error {}", authException.getMessage());
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid email or password");
+        final String expiredJwt = (String) request.getAttribute("Expired");
+
+        if (expiredJwt != null) {
+            logger.error("Unauthorized error {}", expiredJwt);
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token is expired, please re-login");
+            response.getHeaderNames();
+        } else {
+            logger.error("Unauthorized error {}", authException.getMessage());
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Email atau Password tidak sesuai");
+        }
     }
 }
