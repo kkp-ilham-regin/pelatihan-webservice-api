@@ -25,6 +25,10 @@ public class CertificateServiceImpl implements CertificateService {
         return certificateRepository.findAllByKodeSertifikatContains(name, pageable);
     }
 
+    public Certificate findParticipantCertificateBelongstoOfferDetail(Long participantId, Long offerId) {
+        return certificateRepository.findCertificateByIdPesertaAndIdPenawaran(participantId, offerId);
+    }
+
     public Certificate findCertificateById(Long id) {
         return certificateRepository.findCertificateById(id);
     }
