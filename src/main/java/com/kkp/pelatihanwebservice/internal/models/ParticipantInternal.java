@@ -127,9 +127,14 @@ public class ParticipantInternal {
     //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JoinColumn(name = "id")
 //    @JsonIgnore
-    @OneToMany(mappedBy = "peserta", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private Set<Certificate> certificates = new HashSet<>();
+//    @OneToMany(mappedBy = "peserta", fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL)
+//    private Set<Certificate> certificates = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id")
+    @JsonIgnore
+    private Set<Certificate> certificates;
 
     public ParticipantInternal() {
     }

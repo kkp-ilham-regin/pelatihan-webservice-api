@@ -48,13 +48,13 @@ public class Certificate {
     @Column(name = "id_penawaran")
     private Long idPenawaran;
 
-    //    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-//    @JoinColumn(name = "id_peserta", insertable = false, updatable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_peserta", insertable = false, updatable = false)
-    @JsonIgnore
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private ParticipantInternal peserta = new ParticipantInternal();
+
+    //    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_peserta", insertable = false, updatable = false)
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_trainer", insertable = false, updatable = false)
