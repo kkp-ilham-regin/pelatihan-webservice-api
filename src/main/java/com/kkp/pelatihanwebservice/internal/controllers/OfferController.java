@@ -3,14 +3,8 @@ package com.kkp.pelatihanwebservice.internal.controllers;
 import com.kkp.pelatihanwebservice.internal.dto.offer.request.OfferRequest;
 import com.kkp.pelatihanwebservice.internal.dto.offer.request.UpdateStatusOfferRequest;
 import com.kkp.pelatihanwebservice.internal.dto.offer.response.OfferResponse;
-import com.kkp.pelatihanwebservice.internal.models.Offer;
-import com.kkp.pelatihanwebservice.internal.models.Status;
-import com.kkp.pelatihanwebservice.internal.models.Training;
-import com.kkp.pelatihanwebservice.internal.models.UserApi;
-import com.kkp.pelatihanwebservice.internal.repositories.OfferRepository;
-import com.kkp.pelatihanwebservice.internal.repositories.StatusRepository;
-import com.kkp.pelatihanwebservice.internal.repositories.TrainingRepository;
-import com.kkp.pelatihanwebservice.internal.repositories.UserApiRepository;
+import com.kkp.pelatihanwebservice.internal.models.*;
+import com.kkp.pelatihanwebservice.internal.repositories.*;
 import com.kkp.pelatihanwebservice.internal.services.offer.OfferService;
 import com.kkp.pelatihanwebservice.internal.services.offer.OfferServiceImpl;
 import com.kkp.pelatihanwebservice.internal.utils.exceptions.ResourceNotFoundException;
@@ -54,6 +48,9 @@ public class OfferController {
 
     @Autowired
     StatusRepository statusRepository;
+
+    @Autowired
+    TrainerRepository trainerRepository;
 
     List<String> errorMessages = new ArrayList<>();
     ResourceNotFoundException notFoundException;
@@ -204,6 +201,7 @@ public class OfferController {
             }
 
             Status status = statusRepository.findStatusById(offerRequest.getStatusId());
+            Trainer trainer = trainerRepository.findTrainerById(offerRequest.getTrainerId());
 
             if (status == null) {
                 notFoundException = new ResourceNotFoundException("Status", "ID", offerRequest.getStatusId());
@@ -218,8 +216,23 @@ public class OfferController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
             }
 
-            Offer offer = new Offer(offerRequest.getStatusId(), offerRequest.getUpdatedAt());
+            if (trainer == null) {
+                notFoundException = new ResourceNotFoundException("Trainer", "ID", offerRequest.getTrainerId());
+                errorMessages.add(notFoundException.getMessage());
+                responseData.setData(null);
+                responseData.setStatus(false);
+                responseData.setCode(404);
+                for (String message : errorMessages) {
+                    responseData.getMessages().add(message);
+                }
+                errorMessages.clear();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
+            }
+
+            Offer offer = new Offer(offerRequest.getStatusId(), offerRequest.getTrainerId(), offerRequest.getUpdatedAt());
             offer.setStatus(status);
+            offer.setTrainer(trainer);
+            System.out.println("Penawaran Id: " + id);
 
             responseData.setStatus(true);
             responseData.setCode(200);

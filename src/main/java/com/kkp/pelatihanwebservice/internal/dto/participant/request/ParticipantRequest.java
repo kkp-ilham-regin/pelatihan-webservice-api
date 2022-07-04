@@ -77,6 +77,9 @@ public class ParticipantRequest {
     @NotNull(message = "Status Pegawai tidak boleh kosong")
     private Long idStatusPegawai;
 
+    @NotNull(message = "Penawaran tidak boleh kosong")
+    private Long idPenawaran;
+
     LocalDateTime createdAt;
     LocalDateTime updated;
 
@@ -262,6 +265,14 @@ public class ParticipantRequest {
 
     public void setIdStatusPegawai(Long idStatusPegawai) {
         this.idStatusPegawai = idStatusPegawai;
+    }
+
+    public Long getIdPenawaran() {
+        return idPenawaran;
+    }
+
+    public void setIdPenawaran(Long idPenawaran) {
+        this.idPenawaran = idPenawaran;
     }
 
     public LocalDateTime getCreatedAt() {

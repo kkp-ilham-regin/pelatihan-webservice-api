@@ -86,6 +86,9 @@ public class ParticipantInternal {
     @Column(name = "id_status_pegawai")
     private Long idStatusPegawai;
 
+    @Column(name = "id_penawaran")
+    private Long idPenawaran;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_wilayah", insertable = false, updatable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -116,12 +119,22 @@ public class ParticipantInternal {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private EmployeeStatus statusPegawai;
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_penawaran", insertable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Offer penawaran;
+
     //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JoinColumn(name = "id")
 //    @JsonIgnore
-    @OneToMany(mappedBy = "peserta", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private Set<Certificate> certificates = new HashSet<>();
+//    @OneToMany(mappedBy = "peserta", fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL)
+//    private Set<Certificate> certificates = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id")
+    @JsonIgnore
+    private Set<Certificate> certificates;
 
     public ParticipantInternal() {
     }
@@ -136,7 +149,8 @@ public class ParticipantInternal {
                                String lokasiKerja, String nik, Date tanggalTmtMasuk, String alamat, String tempatLahir,
                                Date tanggalLahir, String golonganDarah, String nomorTelepon, String namaSekolah, String email,
                                String npwp, String urlImage, Long idWilayah, Long idJenisKelamin, Long idAgama,
-                               Long idStatusPernikahan, Long idPendidikan, Long idStatusPegawai, LocalDateTime createdAt,
+                               Long idStatusPernikahan, Long idPendidikan, Long idStatusPegawai, Long idPenawaran,
+                               LocalDateTime createdAt,
                                LocalDateTime updatedAt) {
         this.namaPeserta = namaPeserta;
         this.nip = nip;
@@ -161,6 +175,7 @@ public class ParticipantInternal {
         this.idStatusPernikahan = idStatusPernikahan;
         this.idPendidikan = idPendidikan;
         this.idStatusPegawai = idStatusPegawai;
+        this.idPenawaran = idPenawaran;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -427,5 +442,21 @@ public class ParticipantInternal {
 
     public void setCertificates(Set<Certificate> certificates) {
         this.certificates = certificates;
+    }
+
+    public Long getIdPenawaran() {
+        return idPenawaran;
+    }
+
+    public void setIdPenawaran(Long idPenawaran) {
+        this.idPenawaran = idPenawaran;
+    }
+
+    public Offer getPenawaran() {
+        return penawaran;
+    }
+
+    public void setPenawaran(Offer penawaran) {
+        this.penawaran = penawaran;
     }
 }

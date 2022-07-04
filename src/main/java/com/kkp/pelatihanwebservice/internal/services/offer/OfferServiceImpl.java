@@ -42,13 +42,18 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public Offer approveOrRejectOffer(Long id, Offer offer) {
-        Offer existingOffer = offerRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Penawaran", "ID", id));
+        Offer existingOffer = offerRepository.findOfferById(id);
+
+        if (existingOffer == null) {
+            offerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Penawaran", "ID", id));
+        }
 
         existingOffer.setStatusId(offer.getStatusId());
+        existingOffer.setTrainerId(offer.getTrainerId());
         existingOffer.setUpdatedAt(LocalDateTime.now());
 
         existingOffer.setStatus(offer.getStatus());
+        existingOffer.setTrainer(offer.getTrainer());
 
         offerRepository.save(existingOffer);
         return existingOffer;
