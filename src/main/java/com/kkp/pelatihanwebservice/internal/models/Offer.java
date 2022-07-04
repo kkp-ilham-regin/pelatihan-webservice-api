@@ -44,6 +44,9 @@ public class Offer {
     @Column(name = "pelatihan_id")
     private Long pelatihanId;
 
+    @Column(name = "trainer_id")
+    private Long trainerId;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -59,6 +62,11 @@ public class Offer {
     @JoinColumn(name = "pelatihan_id", insertable = false, updatable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Training training;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "trainer_id", insertable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Trainer trainer;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "status_id", insertable = false, updatable = false)
@@ -85,8 +93,9 @@ public class Offer {
         this.updatedAt = updatedAt;
     }
 
-    public Offer(Long statusId, LocalDateTime updatedAt) {
+    public Offer(Long statusId, Long trainerId, LocalDateTime updatedAt) {
         this.statusId = statusId;
+        this.trainerId = trainerId;
         this.updatedAt = updatedAt;
     }
 
@@ -216,5 +225,21 @@ public class Offer {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Long getTrainerId() {
+        return trainerId;
+    }
+
+    public void setTrainerId(Long trainerId) {
+        this.trainerId = trainerId;
+    }
+
+    public Trainer getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(Trainer trainer) {
+        this.trainer = trainer;
     }
 }
