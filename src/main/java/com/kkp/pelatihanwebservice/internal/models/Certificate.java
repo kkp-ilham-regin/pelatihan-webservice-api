@@ -45,6 +45,9 @@ public class Certificate {
     @Column(name = "id_pelatihan")
     private Long idPelatihan;
 
+    @Column(name = "id_penawaran")
+    private Long idPenawaran;
+
     //    @ManyToOne(fetch = FetchType.EAGER, optional = false)
 //    @JoinColumn(name = "id_peserta", insertable = false, updatable = false)
 //    @OnDelete(action = OnDeleteAction.CASCADE)
@@ -63,6 +66,11 @@ public class Certificate {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Training pelatihan = new Training();
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "id_penawaran", insertable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Offer penawaran = new Offer();
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -74,7 +82,7 @@ public class Certificate {
 
     public Certificate(String kodeSertifikat, Date tanggalMulaiPelatihan, Date tanggalSelesaiPelatihan, Date tanggalExpired,
                        String namaLembaga, String lokasi, String fileSertifikat, Long idPeserta, Long idTrainer,
-                       Long idPelatihan, LocalDateTime createdAt, LocalDateTime updatedAt) {
+                       Long idPelatihan, Long idPenawaran, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.kodeSertifikat = kodeSertifikat;
         this.tanggalMulaiPelatihan = tanggalMulaiPelatihan;
         this.tanggalSelesaiPelatihan = tanggalSelesaiPelatihan;
@@ -85,6 +93,7 @@ public class Certificate {
         this.idPeserta = idPeserta;
         this.idTrainer = idTrainer;
         this.idPelatihan = idPelatihan;
+        this.idPenawaran = idPenawaran;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -231,5 +240,21 @@ public class Certificate {
 
     public void setIdPelatihan(Long idPelatihan) {
         this.idPelatihan = idPelatihan;
+    }
+
+    public Long getIdPenawaran() {
+        return idPenawaran;
+    }
+
+    public void setIdPenawaran(Long idPenawaran) {
+        this.idPenawaran = idPenawaran;
+    }
+
+    public Offer getPenawaran() {
+        return penawaran;
+    }
+
+    public void setPenawaran(Offer penawaran) {
+        this.penawaran = penawaran;
     }
 }
