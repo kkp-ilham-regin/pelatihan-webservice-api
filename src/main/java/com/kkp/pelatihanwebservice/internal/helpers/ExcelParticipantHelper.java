@@ -15,7 +15,7 @@ public class ExcelParticipantHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String[] HEADERs = {"Nama Peserta", "NIP", "Nomor KTA", "Expired KTA", "Jabatan", "Lokasi Kerja", "NIK", "Tanggal TMT Masuk",
             "Alamat", "Tempat Lahir", "Tanggal Lahir", "Golongan Darah", "Nomor Telepon", "Nama Sekolah", "Email", "NPWP", "Url Image",
-            "ID Wilayah", "ID JenisKelamin", "ID Agama", "ID Status Pernikahan", "ID Pendidikan", "ID Status Pegawai"};
+            "ID Wilayah", "ID JenisKelamin", "ID Agama", "ID Status Pernikahan", "ID Pendidikan", "ID Status Pegawai", "ID Penawaran"};
 
     static String SHEET = "Participants";
 
@@ -114,6 +114,9 @@ public class ExcelParticipantHelper {
                             break;
                         case 22:
                             participant.setIdStatusPegawai((long) currentCell.getNumericCellValue());
+                            break;
+                        case 23:
+                            participant.setIdPenawaran((long) currentCell.getNumericCellValue());
                             break;
                     }
                     participant.setCreatedAt(LocalDateTime.now());

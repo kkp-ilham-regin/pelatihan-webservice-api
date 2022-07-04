@@ -60,6 +60,7 @@ public class ParticipantInternalServiceImpl implements ParticipantInternalServic
         existingParticipant.setIdStatusPernikahan(participantInternal.getIdStatusPernikahan());
         existingParticipant.setIdPendidikan(participantInternal.getIdPendidikan());
         existingParticipant.setIdStatusPegawai(participantInternal.getIdStatusPegawai());
+        existingParticipant.setIdPenawaran(participantInternal.getIdPenawaran());
         existingParticipant.setUpdatedAt(LocalDateTime.now());
 
         existingParticipant.setWilayah(participantInternal.getWilayah());
@@ -68,6 +69,7 @@ public class ParticipantInternalServiceImpl implements ParticipantInternalServic
         existingParticipant.setStatusPernikahan(participantInternal.getStatusPernikahan());
         existingParticipant.setPendidikan(participantInternal.getPendidikan());
         existingParticipant.setStatusPegawai(participantInternal.getStatusPegawai());
+        existingParticipant.setPenawaran(participantInternal.getPenawaran());
 
         participantInternalRepository.save(existingParticipant);
         return existingParticipant;

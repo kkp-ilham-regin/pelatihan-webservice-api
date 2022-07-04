@@ -58,6 +58,9 @@ public class ParticipantInternalController {
     @Autowired
     EmployeeStatusRepository employeeStatusRepository;
 
+    @Autowired
+    OfferRepository offerRepository;
+
     List<String> errorMessages = new ArrayList<String>();
     ResourceNotFoundException notFoundException;
     LocalDateTime createdAt = LocalDateTime.now();
@@ -129,7 +132,20 @@ public class ParticipantInternalController {
             MaritalStatus maritalStatus = maritalStatusRepository.findMaritalStatusById(participantRequest.getIdStatusPernikahan());
             Education education = educationRepository.findEducationById(participantRequest.getIdPendidikan());
             EmployeeStatus employeeStatus = employeeStatusRepository.findEmployeeStatusById(participantRequest.getIdStatusPegawai());
+            Offer offer = offerRepository.findOfferById(participantRequest.getIdPenawaran());
 
+            if (offer == null) {
+                notFoundException = new ResourceNotFoundException("Penawaran", "ID", participantRequest.getIdPenawaran());
+                errorMessages.add(notFoundException.getMessage());
+                responseData.setCode(404);
+                responseData.setStatus(false);
+                responseData.setData(null);
+                for (String message : errorMessages) {
+                    responseData.getMessages().add(message);
+                }
+                errorMessages.clear();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
+            }
             if (area == null) {
                 notFoundException = new ResourceNotFoundException("Wilayah", "ID", participantRequest.getIdWilayah());
                 errorMessages.add(notFoundException.getMessage());
@@ -210,7 +226,8 @@ public class ParticipantInternalController {
                     participantRequest.getGolonganDarah(), participantRequest.getNomorTelepon(), participantRequest.getNamaSekolah(),
                     participantRequest.getEmail(), participantRequest.getNpwp(), participantRequest.getUrlImage(), participantRequest.getIdWilayah(),
                     participantRequest.getIdJenisKelamin(), participantRequest.getIdAgama(), participantRequest.getIdStatusPernikahan(),
-                    participantRequest.getIdPendidikan(), participantRequest.getIdStatusPegawai(), createdAt, participantRequest.getUpdated());
+                    participantRequest.getIdPendidikan(), participantRequest.getIdStatusPegawai(), participantRequest.getIdPenawaran(),
+                    createdAt, participantRequest.getUpdated());
 
             participantInternal.setWilayah(area);
             participantInternal.setJenisKelamin(gender);
@@ -218,6 +235,7 @@ public class ParticipantInternalController {
             participantInternal.setStatusPernikahan(maritalStatus);
             participantInternal.setPendidikan(education);
             participantInternal.setStatusPegawai(employeeStatus);
+            participantInternal.setPenawaran(offer);
 
             responseData.setStatus(true);
             responseData.setCode(200);
@@ -254,7 +272,20 @@ public class ParticipantInternalController {
             MaritalStatus maritalStatus = maritalStatusRepository.findMaritalStatusById(participantRequest.getIdStatusPernikahan());
             Education education = educationRepository.findEducationById(participantRequest.getIdPendidikan());
             EmployeeStatus employeeStatus = employeeStatusRepository.findEmployeeStatusById(participantRequest.getIdStatusPegawai());
+            Offer offer = offerRepository.findOfferById(participantRequest.getIdPenawaran());
 
+            if (offer == null) {
+                notFoundException = new ResourceNotFoundException("Penawaran", "ID", participantRequest.getIdPenawaran());
+                errorMessages.add(notFoundException.getMessage());
+                responseData.setCode(404);
+                responseData.setStatus(false);
+                responseData.setData(null);
+                for (String message : errorMessages) {
+                    responseData.getMessages().add(message);
+                }
+                errorMessages.clear();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
+            }
             if (area == null) {
                 notFoundException = new ResourceNotFoundException("Wilayah", "ID", participantRequest.getIdWilayah());
                 errorMessages.add(notFoundException.getMessage());
@@ -335,8 +366,8 @@ public class ParticipantInternalController {
                     participantRequest.getGolonganDarah(), participantRequest.getNomorTelepon(), participantRequest.getNamaSekolah(),
                     participantRequest.getEmail(), participantRequest.getNpwp(), participantRequest.getUrlImage(), participantRequest.getIdWilayah(),
                     participantRequest.getIdJenisKelamin(), participantRequest.getIdAgama(), participantRequest.getIdStatusPernikahan(),
-                    participantRequest.getIdPendidikan(), participantRequest.getIdStatusPegawai(), participantRequest.getCreatedAt(),
-                    updatedAt);
+                    participantRequest.getIdPendidikan(), participantRequest.getIdStatusPegawai(), participantRequest.getIdPenawaran(),
+                    participantRequest.getCreatedAt(), updatedAt);
 
             participantInternal.setWilayah(area);
             participantInternal.setJenisKelamin(gender);
@@ -344,6 +375,7 @@ public class ParticipantInternalController {
             participantInternal.setStatusPernikahan(maritalStatus);
             participantInternal.setPendidikan(education);
             participantInternal.setStatusPegawai(employeeStatus);
+            participantInternal.setPenawaran(offer);
 
             responseData.setStatus(true);
             responseData.setCode(200);
