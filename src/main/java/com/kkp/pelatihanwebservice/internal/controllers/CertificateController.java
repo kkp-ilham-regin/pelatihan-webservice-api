@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -64,6 +65,12 @@ public class CertificateController {
             result += characters.charAt((int) Math.floor(Math.random() * charsLength));
         }
         return result;
+    }
+
+    public static Calendar dateToCalendar(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
     }
 
     @GetMapping("")
@@ -150,6 +157,10 @@ public class CertificateController {
             }
 
             Offer offer = offerRepository.findOfferById(certificateRequest.getIdPenawaran());
+            Calendar cal = dateToCalendar(offer.getTanggalPelatihan());
+            cal.add(Calendar.MONTH, +24);
+            Date result = cal.getTime();
+
             ParticipantInternal participantInternal = participantInternalRepository.findParticipantInternalById(certificateRequest.getIdPeserta());
 
             if (offer == null) {
@@ -212,7 +223,7 @@ public class CertificateController {
             String certificateCode = instituteName.concat(generateCertificateCode(5));
             Date trainingStartDate = offer.getTanggalPelatihan();
             Date trainingEndDate = offer.getTanggalPelatihan();
-            Date certificateExpired = offer.getTanggalPelatihan();
+            Date certificateExpired = result;
             String trainingLocation = offer.getAlamatKantor();
 
             Certificate certificate = new Certificate(certificateCode, trainingStartDate,
