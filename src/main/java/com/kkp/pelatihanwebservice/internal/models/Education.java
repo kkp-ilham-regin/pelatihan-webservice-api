@@ -23,9 +23,9 @@ public class Education {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "pendidikan")
-    private Set<ParticipantInternal> participantInternal;
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "pendidikan")
+//    private Set<ParticipantInternal> participantInternal;
 
     public Education() {
     }

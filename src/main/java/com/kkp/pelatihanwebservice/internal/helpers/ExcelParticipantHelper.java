@@ -98,7 +98,7 @@ public class ExcelParticipantHelper {
                             participant.setUrlImage(currentCell.getStringCellValue());
                             break;
                         case 17:
-                            participant.setIdWilayah((long) currentCell.getNumericCellValue());
+                            participant.setWilayah(currentCell.getStringCellValue());
                             break;
                         case 18:
                             participant.setIdJenisKelamin((long) currentCell.getNumericCellValue());
@@ -110,10 +110,10 @@ public class ExcelParticipantHelper {
                             participant.setIdStatusPernikahan((long) currentCell.getNumericCellValue());
                             break;
                         case 21:
-                            participant.setIdPendidikan((long) currentCell.getNumericCellValue());
+                            participant.setPendidikan(currentCell.getStringCellValue());
                             break;
                         case 22:
-                            participant.setIdStatusPegawai((long) currentCell.getNumericCellValue());
+                            participant.setStatusPegawai(currentCell.getStringCellValue());
                             break;
                         case 23:
                             participant.setIdPenawaran((long) currentCell.getNumericCellValue());

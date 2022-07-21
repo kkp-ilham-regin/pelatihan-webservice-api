@@ -68,8 +68,8 @@ public class ParticipantInternal {
     @Column(name = "url_image")
     private String urlImage;
 
-    @Column(name = "id_wilayah")
-    private Long idWilayah;
+    @Column(name = "wilayah")
+    private String wilayah;
 
     @Column(name = "id_jenis_kelamin")
     private Long idJenisKelamin;
@@ -80,19 +80,19 @@ public class ParticipantInternal {
     @Column(name = "id_status_pernikahan")
     private Long idStatusPernikahan;
 
-    @Column(name = "id_pendidikan")
-    private Long idPendidikan;
+    @Column(name = "pendidikan")
+    private String pendidikan;
 
-    @Column(name = "id_status_pegawai")
-    private Long idStatusPegawai;
+    @Column(name = "status_pegawai")
+    private String statusPegawai;
 
     @Column(name = "id_penawaran")
     private Long idPenawaran;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_wilayah", insertable = false, updatable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Area wilayah;
+//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+//    @JoinColumn(name = "id_wilayah", insertable = false, updatable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    private Area wilayah;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_jenis_kelamin", insertable = false, updatable = false)
@@ -109,15 +109,15 @@ public class ParticipantInternal {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private MaritalStatus statusPernikahan;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_pendidikan", insertable = false, updatable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Education pendidikan;
+//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+//    @JoinColumn(name = "id_pendidikan", insertable = false, updatable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    private Education pendidikan;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_status_pegawai", insertable = false, updatable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private EmployeeStatus statusPegawai;
+//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+//    @JoinColumn(name = "id_status_pegawai", insertable = false, updatable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    private EmployeeStatus statusPegawai;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_penawaran", insertable = false, updatable = false)
@@ -148,8 +148,8 @@ public class ParticipantInternal {
     public ParticipantInternal(String namaPeserta, String nip, String nomorKta, Date expiredKta, String jabatan,
                                String lokasiKerja, String nik, Date tanggalTmtMasuk, String alamat, String tempatLahir,
                                Date tanggalLahir, String golonganDarah, String nomorTelepon, String namaSekolah, String email,
-                               String npwp, String urlImage, Long idWilayah, Long idJenisKelamin, Long idAgama,
-                               Long idStatusPernikahan, Long idPendidikan, Long idStatusPegawai, Long idPenawaran,
+                               String npwp, String urlImage, String wilayah, Long idJenisKelamin, Long idAgama,
+                               Long idStatusPernikahan, String pendidikan, String statusPegawai, Long idPenawaran,
                                LocalDateTime createdAt,
                                LocalDateTime updatedAt) {
         this.namaPeserta = namaPeserta;
@@ -169,12 +169,12 @@ public class ParticipantInternal {
         this.email = email;
         this.npwp = npwp;
         this.urlImage = urlImage;
-        this.idWilayah = idWilayah;
+        this.wilayah = wilayah;
         this.idJenisKelamin = idJenisKelamin;
         this.idAgama = idAgama;
         this.idStatusPernikahan = idStatusPernikahan;
-        this.idPendidikan = idPendidikan;
-        this.idStatusPegawai = idStatusPegawai;
+        this.pendidikan = pendidikan;
+        this.statusPegawai = statusPegawai;
         this.idPenawaran = idPenawaran;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -324,13 +324,13 @@ public class ParticipantInternal {
         this.urlImage = urlImage;
     }
 
-    public Area getWilayah() {
-        return wilayah;
-    }
-
-    public void setWilayah(Area wilayah) {
-        this.wilayah = wilayah;
-    }
+//    public Area getWilayah() {
+//        return wilayah;
+//    }
+//
+//    public void setWilayah(Area wilayah) {
+//        this.wilayah = wilayah;
+//    }
 
     public Gender getJenisKelamin() {
         return jenisKelamin;
@@ -356,19 +356,44 @@ public class ParticipantInternal {
         this.statusPernikahan = statusPernikahan;
     }
 
-    public Education getPendidikan() {
+//    public Education getPendidikan() {
+//        return pendidikan;
+//    }
+//
+//    public void setPendidikan(Education pendidikan) {
+//        this.pendidikan = pendidikan;
+//    }
+
+//    public EmployeeStatus getStatusPegawai() {
+//        return statusPegawai;
+//    }
+//
+//    public void setStatusPegawai(EmployeeStatus statusPegawai) {
+//        this.statusPegawai = statusPegawai;
+//    }
+
+
+    public String getWilayah() {
+        return wilayah;
+    }
+
+    public void setWilayah(String wilayah) {
+        this.wilayah = wilayah;
+    }
+
+    public String getPendidikan() {
         return pendidikan;
     }
 
-    public void setPendidikan(Education pendidikan) {
+    public void setPendidikan(String pendidikan) {
         this.pendidikan = pendidikan;
     }
 
-    public EmployeeStatus getStatusPegawai() {
+    public String getStatusPegawai() {
         return statusPegawai;
     }
 
-    public void setStatusPegawai(EmployeeStatus statusPegawai) {
+    public void setStatusPegawai(String statusPegawai) {
         this.statusPegawai = statusPegawai;
     }
 
@@ -388,13 +413,13 @@ public class ParticipantInternal {
         this.updatedAt = updatedAt;
     }
 
-    public Long getIdWilayah() {
-        return idWilayah;
-    }
-
-    public void setIdWilayah(Long idWilayah) {
-        this.idWilayah = idWilayah;
-    }
+//    public Long getIdWilayah() {
+//        return idWilayah;
+//    }
+//
+//    public void setIdWilayah(Long idWilayah) {
+//        this.idWilayah = idWilayah;
+//    }
 
     public Long getIdJenisKelamin() {
         return idJenisKelamin;
@@ -420,21 +445,21 @@ public class ParticipantInternal {
         this.idStatusPernikahan = idStatusPernikahan;
     }
 
-    public Long getIdPendidikan() {
-        return idPendidikan;
-    }
-
-    public void setIdPendidikan(Long idPendidikan) {
-        this.idPendidikan = idPendidikan;
-    }
-
-    public Long getIdStatusPegawai() {
-        return idStatusPegawai;
-    }
-
-    public void setIdStatusPegawai(Long idStatusPegawai) {
-        this.idStatusPegawai = idStatusPegawai;
-    }
+//    public Long getIdPendidikan() {
+//        return idPendidikan;
+//    }
+//
+//    public void setIdPendidikan(Long idPendidikan) {
+//        this.idPendidikan = idPendidikan;
+//    }
+//
+//    public Long getIdStatusPegawai() {
+//        return idStatusPegawai;
+//    }
+//
+//    public void setIdStatusPegawai(Long idStatusPegawai) {
+//        this.idStatusPegawai = idStatusPegawai;
+//    }
 
     public Set<Certificate> getCertificates() {
         return certificates;

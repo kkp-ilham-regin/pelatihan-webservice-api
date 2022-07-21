@@ -58,12 +58,12 @@ public class ParticipantInternalServiceImpl implements ParticipantInternalServic
         existingParticipant.setEmail(participantInternal.getEmail());
         existingParticipant.setNpwp(participantInternal.getNpwp());
         existingParticipant.setUrlImage(participantInternal.getUrlImage());
-        existingParticipant.setIdWilayah(participantInternal.getIdWilayah());
+//        existingParticipant.setIdWilayah(participantInternal.getIdWilayah());
         existingParticipant.setIdJenisKelamin(participantInternal.getIdJenisKelamin());
         existingParticipant.setIdAgama(participantInternal.getIdAgama());
         existingParticipant.setIdStatusPernikahan(participantInternal.getIdStatusPernikahan());
-        existingParticipant.setIdPendidikan(participantInternal.getIdPendidikan());
-        existingParticipant.setIdStatusPegawai(participantInternal.getIdStatusPegawai());
+//        existingParticipant.setIdPendidikan(participantInternal.getIdPendidikan());
+//        existingParticipant.setIdStatusPegawai(participantInternal.getIdStatusPegawai());
         existingParticipant.setIdPenawaran(participantInternal.getIdPenawaran());
         existingParticipant.setUpdatedAt(LocalDateTime.now());
 

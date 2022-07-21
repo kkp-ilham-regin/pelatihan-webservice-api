@@ -55,8 +55,7 @@ public class ParticipantRequest {
 
     private String urlImage;
 
-    @NotNull(message = "Wilayah tidak boleh kosong")
-    private Long idWilayah;
+    private String wilayah;
 
     @NotNull(message = "Jenis Kelamin tidak boleh kosong")
     private Long idJenisKelamin;
@@ -67,11 +66,9 @@ public class ParticipantRequest {
     @NotNull(message = "Status Pernikahan tidak boleh kosong")
     private Long idStatusPernikahan;
 
-    @NotNull(message = "Pendidikan tidak boleh kosong")
-    private Long idPendidikan;
+    private String pendidikan;
 
-    @NotNull(message = "Status Pegawai tidak boleh kosong")
-    private Long idStatusPegawai;
+    private String statusPegawai;
 
     @NotNull(message = "Penawaran tidak boleh kosong")
     private Long idPenawaran;
@@ -215,13 +212,13 @@ public class ParticipantRequest {
         this.urlImage = urlImage;
     }
 
-    public Long getIdWilayah() {
-        return idWilayah;
-    }
-
-    public void setIdWilayah(Long idWilayah) {
-        this.idWilayah = idWilayah;
-    }
+//    public Long getIdWilayah() {
+//        return idWilayah;
+//    }
+//
+//    public void setIdWilayah(Long idWilayah) {
+//        this.idWilayah = idWilayah;
+//    }
 
     public Long getIdJenisKelamin() {
         return idJenisKelamin;
@@ -247,20 +244,45 @@ public class ParticipantRequest {
         this.idStatusPernikahan = idStatusPernikahan;
     }
 
-    public Long getIdPendidikan() {
-        return idPendidikan;
+//    public Long getIdPendidikan() {
+//        return idPendidikan;
+//    }
+//
+//    public void setIdPendidikan(Long idPendidikan) {
+//        this.idPendidikan = idPendidikan;
+//    }
+//
+//    public Long getIdStatusPegawai() {
+//        return idStatusPegawai;
+//    }
+//
+//    public void setIdStatusPegawai(Long idStatusPegawai) {
+//        this.idStatusPegawai = idStatusPegawai;
+//    }
+
+
+    public String getWilayah() {
+        return wilayah;
     }
 
-    public void setIdPendidikan(Long idPendidikan) {
-        this.idPendidikan = idPendidikan;
+    public void setWilayah(String wilayah) {
+        this.wilayah = wilayah;
     }
 
-    public Long getIdStatusPegawai() {
-        return idStatusPegawai;
+    public String getPendidikan() {
+        return pendidikan;
     }
 
-    public void setIdStatusPegawai(Long idStatusPegawai) {
-        this.idStatusPegawai = idStatusPegawai;
+    public void setPendidikan(String pendidikan) {
+        this.pendidikan = pendidikan;
+    }
+
+    public String getStatusPegawai() {
+        return statusPegawai;
+    }
+
+    public void setStatusPegawai(String statusPegawai) {
+        this.statusPegawai = statusPegawai;
     }
 
     public Long getIdPenawaran() {
