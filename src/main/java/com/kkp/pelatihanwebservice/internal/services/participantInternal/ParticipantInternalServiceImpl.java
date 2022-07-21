@@ -23,6 +23,10 @@ public class ParticipantInternalServiceImpl implements ParticipantInternalServic
         return participantInternalRepository.findByNamaPesertaContains(name, pageable);
     }
 
+    public Iterable<ParticipantInternal> findAllParticipantByOfferId(Long id, Pageable pageable) {
+        return participantInternalRepository.findAllByIdPenawaran(id, pageable);
+    }
+
     public ParticipantInternal findParticipantInternalById(Long id) {
         return participantInternalRepository.findParticipantInternalById(id);
     }
