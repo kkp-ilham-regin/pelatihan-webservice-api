@@ -216,19 +216,6 @@ public class OfferController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
             }
 
-            if (trainer == null) {
-                notFoundException = new ResourceNotFoundException("Trainer", "ID", offerRequest.getTrainerId());
-                errorMessages.add(notFoundException.getMessage());
-                responseData.setData(null);
-                responseData.setStatus(false);
-                responseData.setCode(404);
-                for (String message : errorMessages) {
-                    responseData.getMessages().add(message);
-                }
-                errorMessages.clear();
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
-            }
-
             Offer offer = new Offer(offerRequest.getStatusId(), offerRequest.getTrainerId(), offerRequest.getUpdatedAt());
             offer.setStatus(status);
             offer.setTrainer(trainer);

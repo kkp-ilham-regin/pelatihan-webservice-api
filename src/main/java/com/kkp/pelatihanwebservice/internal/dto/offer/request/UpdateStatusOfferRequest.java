@@ -7,8 +7,7 @@ import java.time.LocalDateTime;
 public class UpdateStatusOfferRequest {
     @NotNull(message = "Status tidak boleh kosong")
     private Long statusId;
-
-    @NotNull(message = "Trainer tidak boleh kosng")
+    
     private Long trainerId;
 
     private LocalDateTime updatedAt;
