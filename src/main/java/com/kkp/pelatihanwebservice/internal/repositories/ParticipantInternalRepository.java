@@ -15,4 +15,6 @@ public interface ParticipantInternalRepository extends JpaRepository<Participant
     ParticipantInternal findParticipantInternalById(Long id);
 
     Optional<ParticipantInternal> findById(Long id);
+
+    Page<ParticipantInternal> findAllByIdPenawaran(Long offerId, Pageable pageable);
 }
