@@ -21,9 +21,9 @@ public class EmployeeStatus {
     private LocalDateTime updatedAt;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "statusPegawai")
-    private Set<ParticipantInternal> participantInternal;
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "statusPegawai")
+//    private Set<ParticipantInternal> participantInternal;
 
     public EmployeeStatus() {
     }

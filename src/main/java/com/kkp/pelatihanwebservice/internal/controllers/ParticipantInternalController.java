@@ -145,12 +145,12 @@ public class ParticipantInternalController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
             }
 
-            Area area = areaRepository.findAreaById(participantRequest.getIdWilayah());
+//            Area area = areaRepository.findAreaById(participantRequest.getIdWilayah());
             Gender gender = genderRepository.findGenderById(participantRequest.getIdJenisKelamin());
             Religion religion = religionRepository.findReligionById(participantRequest.getIdAgama());
             MaritalStatus maritalStatus = maritalStatusRepository.findMaritalStatusById(participantRequest.getIdStatusPernikahan());
-            Education education = educationRepository.findEducationById(participantRequest.getIdPendidikan());
-            EmployeeStatus employeeStatus = employeeStatusRepository.findEmployeeStatusById(participantRequest.getIdStatusPegawai());
+//            Education education = educationRepository.findEducationById(participantRequest.getIdPendidikan());
+//            EmployeeStatus employeeStatus = employeeStatusRepository.findEmployeeStatusById(participantRequest.getIdStatusPegawai());
             Offer offer = offerRepository.findOfferById(participantRequest.getIdPenawaran());
 
             if (offer == null) {
@@ -165,18 +165,18 @@ public class ParticipantInternalController {
                 errorMessages.clear();
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
             }
-            if (area == null) {
-                notFoundException = new ResourceNotFoundException("Wilayah", "ID", participantRequest.getIdWilayah());
-                errorMessages.add(notFoundException.getMessage());
-                responseData.setCode(404);
-                responseData.setStatus(false);
-                responseData.setData(null);
-                for (String message : errorMessages) {
-                    responseData.getMessages().add(message);
-                }
-                errorMessages.clear();
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
-            }
+//            if (area == null) {
+//                notFoundException = new ResourceNotFoundException("Wilayah", "ID", participantRequest.getIdWilayah());
+//                errorMessages.add(notFoundException.getMessage());
+//                responseData.setCode(404);
+//                responseData.setStatus(false);
+//                responseData.setData(null);
+//                for (String message : errorMessages) {
+//                    responseData.getMessages().add(message);
+//                }
+//                errorMessages.clear();
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
+//            }
             if (gender == null) {
                 notFoundException = new ResourceNotFoundException("Jenis Kelamin", "ID", participantRequest.getIdJenisKelamin());
                 errorMessages.add(notFoundException.getMessage());
@@ -213,47 +213,47 @@ public class ParticipantInternalController {
                 errorMessages.clear();
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
             }
-            if (education == null) {
-                notFoundException = new ResourceNotFoundException("Pendidikan", "ID", participantRequest.getIdPendidikan());
-                errorMessages.add(notFoundException.getMessage());
-                responseData.setCode(404);
-                responseData.setStatus(false);
-                responseData.setData(null);
-                for (String message : errorMessages) {
-                    responseData.getMessages().add(message);
-                }
-                errorMessages.clear();
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
-            }
-            if (employeeStatus == null) {
-                notFoundException = new ResourceNotFoundException("Status Pegawai", "ID", participantRequest.getIdStatusPegawai());
-                errorMessages.add(notFoundException.getMessage());
-                responseData.setCode(404);
-                responseData.setStatus(false);
-                responseData.setData(null);
-                for (String message : errorMessages) {
-                    responseData.getMessages().add(message);
-                }
-                errorMessages.clear();
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
-            }
+//            if (education == null) {
+//                notFoundException = new ResourceNotFoundException("Pendidikan", "ID", participantRequest.getIdPendidikan());
+//                errorMessages.add(notFoundException.getMessage());
+//                responseData.setCode(404);
+//                responseData.setStatus(false);
+//                responseData.setData(null);
+//                for (String message : errorMessages) {
+//                    responseData.getMessages().add(message);
+//                }
+//                errorMessages.clear();
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
+//            }
+//            if (employeeStatus == null) {
+//                notFoundException = new ResourceNotFoundException("Status Pegawai", "ID", participantRequest.getIdStatusPegawai());
+//                errorMessages.add(notFoundException.getMessage());
+//                responseData.setCode(404);
+//                responseData.setStatus(false);
+//                responseData.setData(null);
+//                for (String message : errorMessages) {
+//                    responseData.getMessages().add(message);
+//                }
+//                errorMessages.clear();
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
+//            }
 
             ParticipantInternal participantInternal = new ParticipantInternal(participantRequest.getNamaPeserta(), participantRequest.getNip(),
                     participantRequest.getNomorKta(), participantRequest.getExpiredKta(), participantRequest.getJabatan(),
                     participantRequest.getLokasiKerja(), participantRequest.getNik(), participantRequest.getTanggalTmtMasuk(),
                     participantRequest.getAlamat(), participantRequest.getTempatLahir(), participantRequest.getTanggalLahir(),
                     participantRequest.getGolonganDarah(), participantRequest.getNomorTelepon(), participantRequest.getNamaSekolah(),
-                    participantRequest.getEmail(), participantRequest.getNpwp(), participantRequest.getUrlImage(), participantRequest.getIdWilayah(),
+                    participantRequest.getEmail(), participantRequest.getNpwp(), participantRequest.getUrlImage(), participantRequest.getWilayah(),
                     participantRequest.getIdJenisKelamin(), participantRequest.getIdAgama(), participantRequest.getIdStatusPernikahan(),
-                    participantRequest.getIdPendidikan(), participantRequest.getIdStatusPegawai(), participantRequest.getIdPenawaran(),
+                    participantRequest.getPendidikan(), participantRequest.getStatusPegawai(), participantRequest.getIdPenawaran(),
                     createdAt, participantRequest.getUpdated());
 
-            participantInternal.setWilayah(area);
+//            participantInternal.setWilayah(area);
             participantInternal.setJenisKelamin(gender);
             participantInternal.setAgama(religion);
             participantInternal.setStatusPernikahan(maritalStatus);
-            participantInternal.setPendidikan(education);
-            participantInternal.setStatusPegawai(employeeStatus);
+//            participantInternal.setPendidikan(education);
+//            participantInternal.setStatusPegawai(employeeStatus);
             participantInternal.setPenawaran(offer);
 
             responseData.setStatus(true);
@@ -285,12 +285,12 @@ public class ParticipantInternalController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
             }
 
-            Area area = areaRepository.findAreaById(participantRequest.getIdWilayah());
+//            Area area = areaRepository.findAreaById(participantRequest.getIdWilayah());
             Gender gender = genderRepository.findGenderById(participantRequest.getIdJenisKelamin());
             Religion religion = religionRepository.findReligionById(participantRequest.getIdAgama());
             MaritalStatus maritalStatus = maritalStatusRepository.findMaritalStatusById(participantRequest.getIdStatusPernikahan());
-            Education education = educationRepository.findEducationById(participantRequest.getIdPendidikan());
-            EmployeeStatus employeeStatus = employeeStatusRepository.findEmployeeStatusById(participantRequest.getIdStatusPegawai());
+//            Education education = educationRepository.findEducationById(participantRequest.getIdPendidikan());
+//            EmployeeStatus employeeStatus = employeeStatusRepository.findEmployeeStatusById(participantRequest.getIdStatusPegawai());
             Offer offer = offerRepository.findOfferById(participantRequest.getIdPenawaran());
 
             if (offer == null) {
@@ -305,18 +305,18 @@ public class ParticipantInternalController {
                 errorMessages.clear();
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
             }
-            if (area == null) {
-                notFoundException = new ResourceNotFoundException("Wilayah", "ID", participantRequest.getIdWilayah());
-                errorMessages.add(notFoundException.getMessage());
-                responseData.setCode(404);
-                responseData.setStatus(false);
-                responseData.setData(null);
-                for (String message : errorMessages) {
-                    responseData.getMessages().add(message);
-                }
-                errorMessages.clear();
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
-            }
+//            if (area == null) {
+//                notFoundException = new ResourceNotFoundException("Wilayah", "ID", participantRequest.getIdWilayah());
+//                errorMessages.add(notFoundException.getMessage());
+//                responseData.setCode(404);
+//                responseData.setStatus(false);
+//                responseData.setData(null);
+//                for (String message : errorMessages) {
+//                    responseData.getMessages().add(message);
+//                }
+//                errorMessages.clear();
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
+//            }
             if (gender == null) {
                 notFoundException = new ResourceNotFoundException("Jenis Kelamin", "ID", participantRequest.getIdJenisKelamin());
                 errorMessages.add(notFoundException.getMessage());
@@ -353,47 +353,47 @@ public class ParticipantInternalController {
                 errorMessages.clear();
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
             }
-            if (education == null) {
-                notFoundException = new ResourceNotFoundException("Pendidikan", "ID", participantRequest.getIdPendidikan());
-                errorMessages.add(notFoundException.getMessage());
-                responseData.setCode(404);
-                responseData.setStatus(false);
-                responseData.setData(null);
-                for (String message : errorMessages) {
-                    responseData.getMessages().add(message);
-                }
-                errorMessages.clear();
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
-            }
-            if (employeeStatus == null) {
-                notFoundException = new ResourceNotFoundException("Status Pegawai", "ID", participantRequest.getIdStatusPegawai());
-                errorMessages.add(notFoundException.getMessage());
-                responseData.setCode(404);
-                responseData.setStatus(false);
-                responseData.setData(null);
-                for (String message : errorMessages) {
-                    responseData.getMessages().add(message);
-                }
-                errorMessages.clear();
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
-            }
+//            if (education == null) {
+//                notFoundException = new ResourceNotFoundException("Pendidikan", "ID", participantRequest.getIdPendidikan());
+//                errorMessages.add(notFoundException.getMessage());
+//                responseData.setCode(404);
+//                responseData.setStatus(false);
+//                responseData.setData(null);
+//                for (String message : errorMessages) {
+//                    responseData.getMessages().add(message);
+//                }
+//                errorMessages.clear();
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
+//            }
+//            if (employeeStatus == null) {
+//                notFoundException = new ResourceNotFoundException("Status Pegawai", "ID", participantRequest.getIdStatusPegawai());
+//                errorMessages.add(notFoundException.getMessage());
+//                responseData.setCode(404);
+//                responseData.setStatus(false);
+//                responseData.setData(null);
+//                for (String message : errorMessages) {
+//                    responseData.getMessages().add(message);
+//                }
+//                errorMessages.clear();
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseData);
+//            }
 
             ParticipantInternal participantInternal = new ParticipantInternal(participantRequest.getNamaPeserta(), participantRequest.getNip(),
                     participantRequest.getNomorKta(), participantRequest.getExpiredKta(), participantRequest.getJabatan(),
                     participantRequest.getLokasiKerja(), participantRequest.getNik(), participantRequest.getTanggalTmtMasuk(),
                     participantRequest.getAlamat(), participantRequest.getTempatLahir(), participantRequest.getTanggalLahir(),
                     participantRequest.getGolonganDarah(), participantRequest.getNomorTelepon(), participantRequest.getNamaSekolah(),
-                    participantRequest.getEmail(), participantRequest.getNpwp(), participantRequest.getUrlImage(), participantRequest.getIdWilayah(),
+                    participantRequest.getEmail(), participantRequest.getNpwp(), participantRequest.getUrlImage(), participantRequest.getWilayah(),
                     participantRequest.getIdJenisKelamin(), participantRequest.getIdAgama(), participantRequest.getIdStatusPernikahan(),
-                    participantRequest.getIdPendidikan(), participantRequest.getIdStatusPegawai(), participantRequest.getIdPenawaran(),
+                    participantRequest.getPendidikan(), participantRequest.getStatusPegawai(), participantRequest.getIdPenawaran(),
                     participantRequest.getCreatedAt(), updatedAt);
 
-            participantInternal.setWilayah(area);
+//            participantInternal.setWilayah(area);
             participantInternal.setJenisKelamin(gender);
             participantInternal.setAgama(religion);
             participantInternal.setStatusPernikahan(maritalStatus);
-            participantInternal.setPendidikan(education);
-            participantInternal.setStatusPegawai(employeeStatus);
+//            participantInternal.setPendidikan(education);
+//            participantInternal.setStatusPegawai(employeeStatus);
             participantInternal.setPenawaran(offer);
 
             responseData.setStatus(true);
