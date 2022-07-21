@@ -13,10 +13,8 @@ public class ParticipantRequest {
     @NotEmpty(message = "NIP tidak boleh kosong")
     private String nip;
 
-    @NotEmpty(message = "Nomor KTA tidak boleh kosong")
     private String nomorKta;
 
-    @NotNull(message = "Expired KTA tidak boleh kosong")
     private Date expiredKta;
 
     @NotEmpty(message = "Jabatan tidak boleh kosong")
@@ -46,7 +44,6 @@ public class ParticipantRequest {
     @NotEmpty(message = "Nomor Telepon tidak boleh kosong")
     private String nomorTelepon;
 
-    @NotEmpty(message = "Nama Sekolah tidak boleh kosong")
     private String namaSekolah;
 
     @NotEmpty(message = "Email tidak boleh kosong")
@@ -56,7 +53,6 @@ public class ParticipantRequest {
     @NotEmpty(message = "NPWP tidak boleh kosong")
     private String npwp;
 
-    @NotEmpty(message = "Url Image tidak boleh kosong")
     private String urlImage;
 
     @NotNull(message = "Wilayah tidak boleh kosong")
