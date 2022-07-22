@@ -15,7 +15,7 @@ public class ExcelParticipantHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String[] HEADERs = {"Nama Peserta", "NIP", "Nomor KTA", "Expired KTA", "Jabatan", "Lokasi Kerja", "NIK", "Tanggal TMT Masuk",
             "Alamat", "Tempat Lahir", "Tanggal Lahir", "Golongan Darah", "Nomor Telepon", "Nama Sekolah", "Email", "NPWP", "Url Image",
-            "ID Wilayah", "ID JenisKelamin", "ID Agama", "ID Status Pernikahan", "ID Pendidikan", "ID Status Pegawai", "ID Penawaran"};
+            "Wilayah", "ID JenisKelamin", "ID Agama", "ID Status Pernikahan", "Pendidikan", "Status Pegawai", "ID Penawaran"};
 
     static String SHEET = "Participants";
 
