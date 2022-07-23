@@ -26,8 +26,8 @@ public class OfferServiceImpl implements OfferService {
         return offerRepository.findAllByUserId(userId, pageable);
     }
 
-    public Iterable<Offer> findAllOffer(Pageable pageable) {
-        return offerRepository.findAll(pageable);
+    public Iterable<Offer> findAllOffer(String companyName, Pageable pageable) {
+        return offerRepository.findByNamaPerusahaanContainingIgnoreCase(companyName, pageable);
     }
 
     public Offer getOfferDetail(Long id) {
