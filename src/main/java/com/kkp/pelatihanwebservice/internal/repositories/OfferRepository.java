@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface OfferRepository extends JpaRepository<Offer, Long> {
-    Page<Offer> findAll(Pageable pageable);
+    Page<Offer> findByNamaPerusahaanContainingIgnoreCase(String companyName, Pageable pageable);
 
     Page<Offer> findAllByUserId(Long userId, Pageable pageable);
 

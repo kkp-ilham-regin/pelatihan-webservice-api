@@ -165,6 +165,7 @@ public class OfferController {
     // admin side
     @GetMapping("/admin")
     public Iterable<Offer> offerList(
+            @RequestParam(required = false, value = "search", defaultValue = "") String searchData,
             @RequestParam(required = false, value = "size", defaultValue = "5") int size,
             @RequestParam(required = false, value = "page", defaultValue = "0") int page,
             @RequestParam(required = false, value = "sort", defaultValue = "desc") String sort
@@ -174,7 +175,7 @@ public class OfferController {
             if (sort.equalsIgnoreCase("asc")) {
                 pageable = PageRequest.of(page, size, Sort.by("id").ascending());
             }
-            return offerServiceImpl.findAllOffer(pageable);
+            return offerServiceImpl.findAllOffer(searchData, pageable);
         } catch (Exception e) {
             throw new IOException(e);
         }
