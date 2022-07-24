@@ -6,6 +6,7 @@ import com.kkp.pelatihanwebservice.internal.models.*;
 import com.kkp.pelatihanwebservice.internal.repositories.*;
 import com.kkp.pelatihanwebservice.internal.services.certificate.CertificateService;
 import com.kkp.pelatihanwebservice.internal.services.certificate.CertificateServiceImpl;
+import com.kkp.pelatihanwebservice.internal.services.participantInternal.ParticipantInternalServiceImpl;
 import com.kkp.pelatihanwebservice.internal.utils.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -39,6 +40,9 @@ public class CertificateController {
     CertificateServiceImpl certificateServiceImpl;
 
     @Autowired
+    ParticipantInternalServiceImpl participantInternalServiceImpl;
+
+    @Autowired
     CertificateRepository certificateRepository;
 
     @Autowired
@@ -55,7 +59,7 @@ public class CertificateController {
 
     List<String> errorMessages = new ArrayList<String>();
     ResourceNotFoundException notFoundException;
-
+    boolean hasCertificate = true;
     String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     public String generateCertificateCode(int length) {
@@ -240,6 +244,8 @@ public class CertificateController {
             responseData.setStatus(true);
             responseData.setCode(200);
             responseData.setData(certificateServiceImpl.createCertificate(certificate));
+
+            participantInternalServiceImpl.updateHasCertificateParticipant(participantInternal.getId(), hasCertificate);
 
             return ResponseEntity.ok(responseData);
         } catch (Exception e) {

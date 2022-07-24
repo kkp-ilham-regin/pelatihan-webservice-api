@@ -7,5 +7,7 @@ public interface ParticipantInternalService {
 
     ParticipantInternal updateParticipantInternal(Long id, ParticipantInternal participantInternal);
 
+    ParticipantInternal updateHasCertificateParticipant(Long id, boolean hasCertificate);
+
     ParticipantInternal deleteParticipantInternal(Long id);
 }

@@ -71,6 +71,9 @@ public class ParticipantInternal {
     @Column(name = "wilayah")
     private String wilayah;
 
+    @Column(name = "has_certificate")
+    private boolean hasCertificate = false;
+
     @Column(name = "id_jenis_kelamin")
     private Long idJenisKelamin;
 
@@ -176,6 +179,41 @@ public class ParticipantInternal {
         this.pendidikan = pendidikan;
         this.statusPegawai = statusPegawai;
         this.idPenawaran = idPenawaran;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public ParticipantInternal(String namaPeserta, String nip, String nomorKta, Date expiredKta, String jabatan,
+                               String lokasiKerja, String nik, Date tanggalTmtMasuk, String alamat, String tempatLahir,
+                               Date tanggalLahir, String golonganDarah, String nomorTelepon, String namaSekolah, String email,
+                               String npwp, String urlImage, String wilayah, Long idJenisKelamin, Long idAgama,
+                               Long idStatusPernikahan, String pendidikan, String statusPegawai, Long idPenawaran,
+                               boolean hasCertificate, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.namaPeserta = namaPeserta;
+        this.nip = nip;
+        this.nomorKta = nomorKta;
+        this.expiredKta = expiredKta;
+        this.jabatan = jabatan;
+        this.lokasiKerja = lokasiKerja;
+        this.nik = nik;
+        this.tanggalTmtMasuk = tanggalTmtMasuk;
+        this.alamat = alamat;
+        this.tempatLahir = tempatLahir;
+        this.tanggalLahir = tanggalLahir;
+        this.golonganDarah = golonganDarah;
+        this.nomorTelepon = nomorTelepon;
+        this.namaSekolah = namaSekolah;
+        this.email = email;
+        this.npwp = npwp;
+        this.urlImage = urlImage;
+        this.wilayah = wilayah;
+        this.idJenisKelamin = idJenisKelamin;
+        this.idAgama = idAgama;
+        this.idStatusPernikahan = idStatusPernikahan;
+        this.pendidikan = pendidikan;
+        this.statusPegawai = statusPegawai;
+        this.idPenawaran = idPenawaran;
+        this.hasCertificate = hasCertificate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -483,5 +521,13 @@ public class ParticipantInternal {
 
     public void setPenawaran(Offer penawaran) {
         this.penawaran = penawaran;
+    }
+
+    public boolean isHasCertificate() {
+        return hasCertificate;
+    }
+
+    public void setHasCertificate(boolean hasCertificate) {
+        this.hasCertificate = hasCertificate;
     }
 }
