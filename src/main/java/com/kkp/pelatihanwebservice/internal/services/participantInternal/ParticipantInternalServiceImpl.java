@@ -80,6 +80,17 @@ public class ParticipantInternalServiceImpl implements ParticipantInternalServic
     }
 
     @Override
+    public ParticipantInternal updateHasCertificateParticipant(Long id, boolean hasCertificate) {
+        ParticipantInternal existingParticipant = participantInternalRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Peserta", "ID", id));
+
+        existingParticipant.setHasCertificate(hasCertificate);
+        participantInternalRepository.save(existingParticipant);
+        return existingParticipant;
+    }
+
+
+    @Override
     public ParticipantInternal deleteParticipantInternal(Long id) {
         ParticipantInternal existingParticipant = participantInternalRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Peserta", "ID", id));

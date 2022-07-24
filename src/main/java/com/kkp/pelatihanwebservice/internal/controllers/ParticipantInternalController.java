@@ -65,6 +65,7 @@ public class ParticipantInternalController {
     ResourceNotFoundException notFoundException;
     LocalDateTime createdAt = LocalDateTime.now();
     LocalDateTime updatedAt = LocalDateTime.now();
+    boolean hasCertificate = false;
 
     @GetMapping("")
     public Iterable<ParticipantInternal> participantInternalList(@RequestParam(required = false, value = "search", defaultValue = "") String searchData,
@@ -246,7 +247,7 @@ public class ParticipantInternalController {
                     participantRequest.getEmail(), participantRequest.getNpwp(), participantRequest.getUrlImage(), participantRequest.getWilayah(),
                     participantRequest.getIdJenisKelamin(), participantRequest.getIdAgama(), participantRequest.getIdStatusPernikahan(),
                     participantRequest.getPendidikan(), participantRequest.getStatusPegawai(), participantRequest.getIdPenawaran(),
-                    createdAt, participantRequest.getUpdated());
+                    hasCertificate, createdAt, participantRequest.getUpdated());
 
 //            participantInternal.setWilayah(area);
             participantInternal.setJenisKelamin(gender);
